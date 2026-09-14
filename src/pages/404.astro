@@ -8,7 +8,7 @@ const description = 'The page you are looking for could not be found.';
 ---
 
 <BaseLayout title={title} description={description}>
-  <Header />
+  <Header slot="header" />
 
   <section class="section" style="min-height:50vh;display:flex;align-items:center;">
     <div class="container text-center">
@@ -22,5 +22,5 @@ const description = 'The page you are looking for could not be found.';
     </div>
   </section>
 
-  <Footer />
+  <Footer slot="footer" />
 </BaseLayout>

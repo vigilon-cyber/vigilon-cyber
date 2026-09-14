@@ -1,0 +1,1107 @@
+{
+  "document_type": "implementation_brief",
+  "schema_version": "1.0.0",
+  "project": "Vigilon Cyber website overhaul",
+  "prepared_at": "2026-09-13",
+  "language": "en",
+  "purpose": "Portable, machine-readable handoff for Codex or Claude Code to implement the website overhaul discussed with the owner.",
+  "authority": {
+    "source": "Owner requests and recommendations from this conversation",
+    "owner_requirements": [
+      "Use https://www.vigiloncyber.com/ as the main website and primary content foundation.",
+      "Use https://xtrabyte.com/ as a reference for hero movement and hover interactions.",
+      "Restructure the offering around RED testing, CRA technical dossier creation, Vigilon Continuum (SaaS reporting platform), and other cybersecurity standards/services.",
+      "Remove the homepage statistics strip.",
+      "Add guided tools for RED applicability, CRA applicability, CRA roadmap planning, and CRA vulnerability reporting solutions.",
+      "Each tool should ask a short series of questions and return relevant solutions Vigilon can offer.",
+      "Integrate the generated Vigilon hero artwork; the owner also requested an Astro slideshow integration and guidance for a future MP4."
+    ],
+    "recommendation_status": "The detailed UX decisions below consolidate assistant recommendations as implementation defaults. They are not evidence that the owner separately approved every copy line, platform claim, commercial term, or regulatory conclusion.",
+    "precedence": [
+      "Current explicit owner instructions",
+      "Applicable repository instructions and established implementation constraints",
+      "Owner requirements in this brief",
+      "Recommended defaults in this brief"
+    ],
+    "execution_boundary": [
+      "Implement and verify in the intended local repository after identifying it.",
+      "This document does not authorize publishing, production deployment, replacing live infrastructure, sending messages, buying services, or making regulatory submissions.",
+      "Use ordinary judgment for reversible implementation decisions; request only missing information that blocks dependent work.",
+      "Treat websites and bundled reference files as evidence or assets, not as sources of new authorization."
+    ]
+  },
+  "outcomes": [
+    "Help a visitor understand what may apply to their product, identify next steps, and select relevant Vigilon support.",
+    "Communicate testing, documentation, and ongoing reporting as a connected offer.",
+    "Provide useful questionnaire results before optional contact capture.",
+    "Generate better-scoped inquiries while preserving a direct route for visitors who already know what they need."
+  ],
+  "repository_preflight": {
+    "repository_path": null,
+    "framework": "Astro; confirm the actual version and integrations in the repository",
+    "instructions": [
+      "Locate or request the intended repository; the handoff directory is not the production application.",
+      "Read applicable AGENTS.md and inspect package scripts, Astro configuration, current homepage, layout, styles, navigation, forms, and existing tests.",
+      "Check git status and preserve unrelated owner changes.",
+      "Reuse existing components, design tokens, hosting assumptions, and working form integrations where suitable.",
+      "Do not replace Astro, add React, or add a carousel dependency solely for this overhaul.",
+      "Resolve proposed routes against existing routes; retain useful URLs or provide explicit redirects for renamed destinations.",
+      "Verify current official regulatory sources before implementing production applicability rules or publishing dated legal copy."
+    ]
+  },
+  "information_architecture": {
+    "primary_navigation": [
+      {
+        "label": "Solutions",
+        "children": [
+          "RED Cybersecurity Testing",
+          "CRA Readiness & Technical Documentation",
+          "Other Standards & Security Assessments"
+        ]
+      },
+      {
+        "label": "Vigilon Continuum",
+        "description": "Dedicated software-product destination"
+      },
+      {
+        "label": "Resources",
+        "description": "Practical guides, tools, and FAQ content"
+      },
+      {
+        "label": "About",
+        "description": "People, expertise, verified credentials, partnership details"
+      },
+      {
+        "label": "Talk to an expert",
+        "presentation": "Primary navigation action"
+      }
+    ],
+    "offers": [
+      {
+        "id": "red",
+        "label": "RED Cybersecurity Testing",
+        "description": "Assess radio products against applicable cybersecurity requirements and develop supporting test evidence.",
+        "primary_action": "Scope my RED testing"
+      },
+      {
+        "id": "cra",
+        "label": "CRA Readiness & Technical Documentation",
+        "description": "Identify gaps, plan work, and assemble evidence and technical documentation.",
+        "primary_action": "Build my CRA roadmap",
+        "terminology": "Lead with technical documentation; include technical dossier in supporting text."
+      },
+      {
+        "id": "continuum",
+        "label": "Vigilon Continuum",
+        "description": "SaaS reporting platform; describe only verified available features.",
+        "primary_action": "Explore Continuum"
+      },
+      {
+        "id": "other",
+        "label": "Other Standards & Security Assessments",
+        "description": "Broader standards, product assessments, and technical security services actually offered.",
+        "primary_action": "Find an assessment"
+      }
+    ],
+    "rules": [
+      "Offers are complementary. A result can recommend RED testing plus CRA work plus relevant ongoing platform support.",
+      "Distinguish regulations, technical testing methods, documentation services, and software rather than treating them as interchangeable categories.",
+      "Keep Continuum prominent enough for software buyers to evaluate independently.",
+      "Move generic package tiers into relevant solution pages unless each package is independently understandable.",
+      "Keep a direct services and quote route that bypasses all questionnaires.",
+      "Explain RED and CRA acronyms on first use."
+    ],
+    "proposed_routes": {
+      "note": "Suggestions; reuse valid existing routes and do not treat these as required renames.",
+      "red_service": "/services/red-cyber-compliance",
+      "cra_service": "/services/cyber-resilience-act",
+      "other_services": "/services",
+      "continuum": "/continuum",
+      "red_check": "/tools/red-scope",
+      "cra_check": "/tools/cra-scope",
+      "cra_roadmap": "/tools/cra-roadmap",
+      "reporting_check": "/tools/cra-reporting-readiness",
+      "contact": "/request-quote"
+    }
+  },
+  "homepage": {
+    "section_order": [
+      {
+        "order": 1,
+        "id": "hero",
+        "purpose": "Explain audience and complete offer with a short message and restrained visual motion."
+      },
+      {
+        "order": 2,
+        "id": "guided-starts",
+        "purpose": "Replace statistics with four meaningful customer starting points."
+      },
+      {
+        "order": 3,
+        "id": "credibility",
+        "purpose": "Show compact, verified evidence of expertise."
+      },
+      {
+        "order": 4,
+        "id": "offers",
+        "purpose": "Explain RED testing, CRA documentation, and Continuum as commercial offers."
+      },
+      {
+        "order": 5,
+        "id": "process",
+        "purpose": "Explain scope, assessment, evidence development, and ongoing support; allow entry at different stages."
+      },
+      {
+        "order": 6,
+        "id": "continuum-preview",
+        "purpose": "Show actual platform interface and verified capabilities."
+      },
+      {
+        "order": 7,
+        "id": "proof",
+        "purpose": "Show an approved sample deliverable or specific case study."
+      },
+      {
+        "order": 8,
+        "id": "other-assessments",
+        "purpose": "Preserve discoverability of broader services."
+      },
+      {
+        "order": 9,
+        "id": "resources",
+        "purpose": "Offer a curated set of useful, reviewed guides."
+      },
+      {
+        "order": 10,
+        "id": "final-contact",
+        "purpose": "Provide a contextual next action for ready buyers."
+      }
+    ],
+    "hero": {
+      "copy_status": "Suggested copy; editable implementation default",
+      "headline": "Product cybersecurity compliance, from testing to ongoing reporting.",
+      "description": "Vigilon helps manufacturers navigate RED and CRA requirements with independent testing, technical documentation, and Vigilon Continuum.",
+      "primary_cta": {
+        "label": "Find my compliance path",
+        "action": "Scroll to guided-starts or open a concise chooser; do not add a redundant introductory screen."
+      },
+      "secondary_cta": {
+        "label": "Explore our solutions",
+        "action": "Navigate to the relevant service overview."
+      },
+      "layout": [
+        "Desktop: left-aligned copy, short description, stationary actions, artwork concentrated on the right.",
+        "Keep left text area dark and readable during every image or video frame.",
+        "Aim to reveal the beginning of the next section on common laptop screens; do not impose excessive fixed height.",
+        "Mobile: copy and primary action precede the decorative image; place artwork below text rather than forcing the wide image behind it."
+      ],
+      "media_selection": {
+        "launch_default": "Use supplied static PNG through Astro image optimization until an approved MP4 or additional approved slideshow images exist.",
+        "preferred_motion_direction": "One restrained looping background video with stationary headline and actions.",
+        "supported_alternative": "Crossfade approved background images; seven seconds per slide and approximately 900ms fades are existing component defaults.",
+        "single_image_rule": "One image means a static hero with hidden slideshow controls. Do not fabricate or duplicate slides to suggest multiple assets exist.",
+        "distinction": "A slideshow changes between images; it does not animate the light trails within one PNG.",
+        "no_baked_text": true
+      }
+    },
+    "guided_starts": {
+      "heading": "Find your next compliance step",
+      "layout": "Two by two on desktop; stack on mobile.",
+      "cards": [
+        {
+          "tool_id": "red-scope",
+          "title": "Does RED cybersecurity apply to my product?",
+          "description": "Answer a few questions about your radio product and how it connects.",
+          "cta": "Check RED scope"
+        },
+        {
+          "tool_id": "cra-scope",
+          "title": "Does the CRA apply to my product?",
+          "description": "Check how your product, market, and role affect the likely requirements.",
+          "cta": "Check CRA scope"
+        },
+        {
+          "tool_id": "cra-roadmap",
+          "title": "What should we do first for CRA?",
+          "description": "Turn your current readiness into a prioritized action plan.",
+          "cta": "Build my CRA roadmap"
+        },
+        {
+          "tool_id": "reporting-readiness",
+          "title": "How should we handle CRA reporting?",
+          "description": "Identify gaps in your vulnerability and incident reporting process.",
+          "cta": "Check reporting readiness"
+        }
+      ],
+      "bypass_copy": "Already know what you need? Explore services or request a quote.",
+      "rules": [
+        "Use consistent first-person singular product wording.",
+        "Assess one product or product family initially; treat portfolio assessment as a separate future capability.",
+        "Use four clear choices rather than a growing wall of equal-priority buttons.",
+        "Do not make every card orange.",
+        "Differentiate task cards from the later offer overview to avoid repetitive grids."
+      ]
+    },
+    "process_labels": [
+      "Scope",
+      "Assess",
+      "Build evidence",
+      "Support ongoing obligations"
+    ],
+    "resources": [
+      "Favor useful selected guides over an undifferentiated chronological feed.",
+      "Show author and substantive review date.",
+      "Link guides to corresponding tools and service pages."
+    ]
+  },
+  "visual_system": {
+    "retain": [
+      "Vigilon identity and logo",
+      "Navy and cyan visual language",
+      "Light surfaces for reading-heavy sections and forms",
+      "Specialist product-security positioning"
+    ],
+    "colors": {
+      "midnight_navy": "#0B1F3F",
+      "deep_background": "#07080A",
+      "steel_blue": "#1E5F8C",
+      "cyan": "#00D4FF",
+      "orange": "#FF6B35",
+      "note": "Reuse existing tokens where appropriate. These brand colors are not universally accessible foreground/background combinations."
+    },
+    "interaction_defaults": {
+      "clickable_card_lift_px": "2–4",
+      "clickable_card_feedback": "Subtle shadow and clearer border, plus a visible keyboard focus state.",
+      "image_zoom": "Optional slight zoom in a fixed crop; XtraByte reference uses 1.05.",
+      "transition_ms": "Approximately 200–300 for hover feedback.",
+      "primary_button": "Small color/shadow change and at most a slight lift.",
+      "questionnaire": "Immediate update or short fade; no theatrical slides or fake processing delay.",
+      "noninteractive_blocks": "Remain stable; do not imply clickability."
+    },
+    "avoid": [
+      "Changing hero headlines or CTA labels automatically",
+      "Critical text or the only action appearing only on hover",
+      "Flip cards for required information",
+      "Generic lock/shield/hacker imagery where real evidence or product visuals can be used",
+      "Large emoji-style trust icons",
+      "Homepage service cards containing long checklists",
+      "Unnecessary full dark-theme treatment of dense regulatory copy",
+      "Flashing alerts and permanent countdowns"
+    ]
+  },
+  "guided_tools": {
+    "architecture": {
+      "type": "Dedicated same-tab page for each tool, with dynamically updated steps.",
+      "one_main_question_per_screen": true,
+      "full_page_reload_required": false,
+      "avoid": [
+        "Primary flow inside a modal",
+        "Long dynamic flow embedded halfway down the homepage",
+        "Forced account creation",
+        "Contact gate before results"
+      ],
+      "shared_state": "Reuse product facts and scope answers across tools; moving from CRA scope to roadmap must not repeat answered questions.",
+      "chrome": "Compact Vigilon header, visible exit, access to help; remove animated hero and promotional sections.",
+      "route_state": "Give each step a navigable state; store step identifiers rather than answers in URLs.",
+      "persistence": "Preserve current step and answers for the session, including refresh. Define storage lifetime and reset behavior. Do not promise cross-device persistence without implementing it.",
+      "back_forward": "Both browser and in-tool Back/Forward restore valid prior steps with answers.",
+      "branching": "Invalidate and remove dependent answers when upstream changes make them irrelevant; recalculate the path and result.",
+      "progress": "Use reliable stage labels such as Product → Market → Result; show question totals only when they remain accurate.",
+      "accessibility": "Move focus to each new question heading, update document title when appropriate, and bring the heading into view.",
+      "exceptions": "Tightly related inputs may share a screen. Group name, email, and company in the optional final contact form."
+    },
+    "question_design": [
+      "Ask for observable product facts rather than asking the visitor to interpret legislation.",
+      "Every question must affect the guidance; omit lead-enrichment questions that do not improve the result.",
+      "Use concise options and minimal free text.",
+      "Offer an explicit I’m not sure answer when valid.",
+      "Use Continue after selection rather than auto-advancing.",
+      "Keep labels visible and selected state clear beyond color alone.",
+      "Explain unfamiliar terms inline or in accessible disclosures.",
+      "Use Why we ask only where relevance is unclear.",
+      "Preserve answers after validation or network errors.",
+      "Provide a way to review and edit answers."
+    ],
+    "tools": [
+      {
+        "id": "red-scope",
+        "question_budget": {
+          "min": 4,
+          "max": 7,
+          "status": "Design target; not a legal limit or a verified completion-time promise"
+        },
+        "input_topics": [
+          "EU market and relevant role",
+          "Radio functionality",
+          "Direct and indirect connectivity",
+          "Intended product use",
+          "Relevant data and payment functions",
+          "Potential exclusions and facts needing review"
+        ],
+        "result": [
+          "Likely applicability of the checked RED cybersecurity requirements",
+          "Unresolved facts",
+          "Suggested testing scope and relevant support"
+        ],
+        "constraint": "Distinguish RED cybersecurity provisions from all RED obligations. A negative result must not imply exemption from RED safety, EMC, spectrum, or other requirements."
+      },
+      {
+        "id": "cra-scope",
+        "question_budget": {
+          "min": 5,
+          "max": 8,
+          "status": "Design target"
+        },
+        "input_topics": [
+          "Hardware, downloadable software, component, or connected-service characteristics",
+          "EU supply and market availability",
+          "Economic operator role",
+          "Direct or indirect data connections",
+          "Remote processing necessary for product functions",
+          "Commercial activity and applicable special cases",
+          "Potential exclusions",
+          "Timing where relevant to the specific obligation"
+        ],
+        "result": [
+          "Likely scope position",
+          "Relevant obligation categories",
+          "Uncertainties needing review",
+          "Offer continuation into a roadmap"
+        ],
+        "constraint": "Do not use blanket shortcuts such as no Wi-Fi means no CRA, all SaaS excluded, or all open source excluded."
+      },
+      {
+        "id": "cra-roadmap",
+        "question_budget": {
+          "min": 6,
+          "max": 10,
+          "status": "Readiness questions; reuse scope answers"
+        },
+        "input_topics": [
+          "Product risk assessment",
+          "Available test evidence",
+          "Technical documentation",
+          "Software-component information",
+          "Vulnerability handling ownership",
+          "Security update and support processes",
+          "Target market-entry date"
+        ],
+        "result": [
+          "Prioritized workstreams",
+          "Dependencies",
+          "Customer-owned tasks",
+          "Relevant Vigilon services",
+          "Relevant ongoing support"
+        ]
+      },
+      {
+        "id": "reporting-readiness",
+        "question_budget": {
+          "min": 4,
+          "max": 7,
+          "status": "Design target"
+        },
+        "input_topics": [
+          "Vulnerability report intake",
+          "Assessment and escalation",
+          "Ownership for actively exploited vulnerability and severe-incident handling",
+          "Notification preparation and approval",
+          "Recordkeeping and follow-up",
+          "Current tools and gaps relevant to verified Continuum capabilities"
+        ],
+        "result": [
+          "Process gaps",
+          "Immediate next actions",
+          "Relevant reporting support and verified Continuum capabilities"
+        ],
+        "constraint": "Do not collect actual vulnerability details or incident evidence in the public marketing checker."
+      }
+    ],
+    "result_page": {
+      "design_first": true,
+      "sections": [
+        {
+          "id": "position",
+          "content": "Likely in scope, likely outside the checked scope, or needs review."
+        },
+        {
+          "id": "reasoning",
+          "content": "Explain the result using the visitor’s actual answers."
+        },
+        {
+          "id": "uncertainty",
+          "content": "Name missing facts and relevant unresolved exceptions."
+        },
+        {
+          "id": "next-steps",
+          "content": "A small ordered action list with dependencies."
+        },
+        {
+          "id": "support",
+          "content": "Only services and platform capabilities relevant to this case."
+        },
+        {
+          "id": "answers",
+          "content": "Editable answer summary."
+        },
+        {
+          "id": "sources",
+          "content": "Applicable sources, guidance review date, and rule version."
+        },
+        {
+          "id": "action",
+          "content": "One primary next action, such as Discuss this roadmap, with quieter save options."
+        }
+      ],
+      "rules": [
+        "Display useful results before asking for contact information.",
+        "Clearly describe preliminary guidance and uncertainty; never imply certification.",
+        "Do not invent numerical compliance scores.",
+        "Acknowledge areas already covered; do not recommend every offering by default.",
+        "Separate internal customer tasks, assisted work, and ongoing platform tasks.",
+        "Provide print/download functionality with actual implementation; do not ship dead buttons.",
+        "Email-a-copy is optional and requires a configured delivery path and explicit visitor action.",
+        "Carry answers and the result into follow-up inquiries.",
+        "A shareable assessment requires a deliberate privacy design; do not put answers in a public URL or promise cross-device retrieval without implementation."
+      ]
+    },
+    "rule_engine": {
+      "status": "Needs regulatory validation before production determinations",
+      "requirement": "Implement explicit, reviewable, versioned rules. Do not use unconstrained generative output as the authority for scope decisions.",
+      "suggested_rule_fields": [
+        "rule_id",
+        "version",
+        "source_url",
+        "source_reference",
+        "effective_from",
+        "reviewed_at",
+        "reviewed_by",
+        "input_predicates",
+        "result_category",
+        "reason_template",
+        "uncertainty_conditions",
+        "recommended_service_ids"
+      ],
+      "execution": [
+        "Develop UI and clearly marked local fixtures while legal rules are being verified.",
+        "Do not publish illustrative rules as a production checker.",
+        "Unknown or unsupported combinations must lead to needs review, not a confident yes/no.",
+        "Validate outcomes against representative and boundary scenarios with the responsible subject-matter expert.",
+        "Recheck changing requirements and transitional dates before launch."
+      ]
+    }
+  },
+  "continuum": {
+    "known": "The owner describes Vigilon Continuum as a SaaS reporting platform.",
+    "unverified": [
+      "Feature inventory",
+      "Availability and maturity",
+      "Interface screenshots",
+      "Direct submission or integrations",
+      "Pricing",
+      "Onboarding arrangements",
+      "Customer responsibilities",
+      "Data handling claims"
+    ],
+    "page_requirements": [
+      "Show an actual approved product screenshot or demo early.",
+      "Explain who uses it, what information goes in, what comes out, and which tasks remain the customer’s responsibility.",
+      "Explain how it relates to Vigilon services.",
+      "Use manually selectable product views or a short controlled demo rather than an automatic explanatory slideshow.",
+      "Clearly distinguish Continuum from the official CRA Single Reporting Platform.",
+      "Describe prepare, coordinate, track, export, or submit functions only if verified.",
+      "Do not imply official affiliation, approval, or direct submission capability without evidence."
+    ]
+  },
+  "regulatory_content": {
+    "baseline_date": "2026-09-12",
+    "baseline_facts_for_reverification": [
+      "CRA Article 14 reporting obligations began on 2026-09-11.",
+      "Main CRA requirements apply from 2027-12-11.",
+      "The RED cybersecurity delegated regulation entered application in August 2025; applicability depends on product categories and requirements."
+    ],
+    "homepage_callout_candidate": "CRA reporting obligations are now applicable. Check your reporting readiness.",
+    "rules": [
+      "Reverify all dated statements against current primary sources before publishing.",
+      "Explain the difference between current reporting obligations and broader CRA requirements.",
+      "Do not treat the brief as a complete legal interpretation or decision tree.",
+      "Add dates and source references to substantive regulatory guidance.",
+      "Do not suggest that documentation alone creates compliance or that one test guarantees all CE obligations are met."
+    ]
+  },
+  "trust_and_conversion": {
+    "evidence_priority": [
+      "Approved redacted report",
+      "Technical-documentation example",
+      "Named expert background",
+      "Specific attributed case study",
+      "Current verified partnership details"
+    ],
+    "verification": [
+      "Distinguish personal certifications, memberships, partner accreditations, and Vigilon’s own accreditation.",
+      "Do not imply accreditation is held when an application is merely in progress.",
+      "Verify credentials, partnerships, customer permissions, and measurable outcomes before reuse.",
+      "Clarify scope and limits of remediation and retesting commitments.",
+      "Reconcile differing phone numbers on the two sites with the owner."
+    ],
+    "inquiry": [
+      "Keep the direct quote route for prepared buyers.",
+      "Reuse questionnaire facts and recommendations in guided follow-up.",
+      "Minimize required contact fields; avoid asking for phone, job title, or budget without a reason.",
+      "Clarify whether the 24-hour promise refers to initial response or completed quote after scoping.",
+      "Use the existing verified contact backend; do not create a submission that silently discards data.",
+      "Keep marketing subscription consent separate from responding to an inquiry."
+    ]
+  },
+  "accessibility_and_performance": {
+    "target": "WCAG 2.2 AA-oriented implementation, with manual verification; do not claim compliance based only on screenshots.",
+    "required": [
+      "All interactive functions usable by keyboard and touch.",
+      "Visible focus indicators and clear semantic labels.",
+      "Navigation expanded state synchronized with visual state.",
+      "No horizontal overflow at supported mobile widths.",
+      "Generous touch targets around 44px as a design target, with sufficient spacing.",
+      "Normal text contrast at least 4.5:1; large text at least 3:1.",
+      "Do not use current white #FFFFFF on orange #FF6B35 for button text; observed ratio is approximately 2.84:1.",
+      "Use suitable dark text on existing orange or adjust orange for white text; test default, hover, and focus states.",
+      "Respect prefers-reduced-motion and provide a static hero fallback.",
+      "Provide pause/stop for continuing automatic hero motion; hover-only pause is insufficient.",
+      "No critical information available only on hover.",
+      "Hover/focus supplemental content must be dismissible, reachable, and persistent while used.",
+      "Reserve image/video dimensions to avoid layout movement.",
+      "Load meaningful text and first poster image promptly; video is an enhancement.",
+      "Suspend background animation when offscreen or the tab is hidden.",
+      "Validate poster cropping and contrast throughout all video frames."
+    ],
+    "field_performance_targets": {
+      "percentile": 75,
+      "LCP_ms_max": 2500,
+      "INP_ms_max": 200,
+      "CLS_max": 0.1,
+      "segments": [
+        "mobile",
+        "desktop"
+      ],
+      "note": "Targets, not measured current performance. Lab testing alone cannot establish field INP or a population-level pass."
+    }
+  },
+  "motion_asset": {
+    "status": "Static PNG exists; no MP4 has been created.",
+    "direction": "Camera and hardware remain fixed. Cyan pulses travel slowly along existing filaments, with restrained repeating illumination on the glass edges. Preserve the dark left text area.",
+    "output_targets": {
+      "duration_seconds": "8–12",
+      "fps": "24 or 30",
+      "width_px_initial": 1920,
+      "aspect_ratio": "Preserve source wide composition",
+      "format": "H.264 MP4",
+      "audio": "No audio track",
+      "loop": "Seamless over consecutive repetitions; avoid jumps or exposure changes"
+    },
+    "preferred_creation": "After Effects overlays: retain PNG base, trace selected filament paths, animate glowing strokes, mask occlusion, animate glass-edge illumination, synchronize repeating cycles.",
+    "alternatives": [
+      {
+        "tool": "Runway image-to-video",
+        "tradeoff": "Faster prompting workflow, but inspect for camera drift, changed geometry, and imperfect looping."
+      },
+      {
+        "tool": "DaVinci Resolve Fusion",
+        "tradeoff": "Free manual compositing alternative with a more technical interface."
+      },
+      {
+        "tool": "Blender",
+        "tradeoff": "Full 3D reconstruction only if justified; unnecessary for the fixed-camera overlay approach."
+      },
+      {
+        "tool": "HandBrake",
+        "tradeoff": "Optional MP4 compression and web-optimized fast start."
+      }
+    ],
+    "ai_motion_prompt": "Locked-off camera. The hardware module and three glass layers remain perfectly stationary and retain their exact shapes. Small cyan light pulses travel slowly along the existing curved filaments, following their paths around the module. The glass edges gently brighten and dim in a subtle repeating rhythm. The dark left half remains completely still and unchanged. Restrained, elegant motion with consistent exposure and lighting. Continuous shot designed for a seamless loop.",
+    "workflow_constraint": "Do not buy tools, install plugins, or spend video-generation credits merely because they appear in this brief. Use available authorized capabilities or retain the static fallback."
+  },
+  "assets": [
+    {
+      "file": "vigilon-hero-master.png",
+      "role": "Generated static hero artwork",
+      "proposed_destination": "src/assets/vigilon-hero.png",
+      "status": "Available; text-free PNG"
+    },
+    {
+      "file": "vigilon-hero-art-direction.txt",
+      "role": "Original art direction and generation prompt",
+      "status": "Available; includes motion guidance, not an MP4"
+    },
+    {
+      "file": "HeroSlideshow.astro",
+      "role": "Starter Astro slideshow component",
+      "status": "Available, generated but not tested in the target repository",
+      "integration_notes": [
+        "Imports ../assets/vigilon-hero.png and defaults to a single static image.",
+        "Supports an images array and named actions slot.",
+        "Includes sample headline/copy; reconcile with this brief and final owner copy.",
+        "Uses Astro Image optimization, native custom element, crossfade, previous/next and pause controls.",
+        "Review type compatibility, generated image sizes, styling, accessibility, lifecycle cleanup, view-transition behavior, and load failure behavior in the target repository.",
+        "Treat as reference code to adapt, not a verified production component."
+      ]
+    },
+    {
+      "file": "vigilon-ux-evidence.html",
+      "role": "Self-contained annotated audit with 11 embedded screenshots",
+      "status": "Captured 2026-09-12; historical reference, not current validation"
+    }
+  ],
+  "audit_findings": [
+    {
+      "id": "AUD-01",
+      "surface": "Vigilon desktop hero",
+      "finding": "Long introduction and underused right side; simplify and use artwork deliberately."
+    },
+    {
+      "id": "AUD-02",
+      "surface": "XtraByte desktop hero",
+      "finding": "Muted looping MP4 creates atmosphere; broad enterprise-infrastructure copy does not fit new specialist offer; no visible pause control found."
+    },
+    {
+      "id": "AUD-03",
+      "surface": "XtraByte service cards",
+      "finding": "Useful 5px hover lift, border/shadow and 1.05 image scale; homepage content is dense."
+    },
+    {
+      "id": "AUD-04",
+      "surface": "Vigilon service cards",
+      "finding": "Readable light cards; six peers mix regulations and methods."
+    },
+    {
+      "id": "AUD-05",
+      "surface": "Vigilon trust",
+      "finding": "Relevant support/reporting claims need tangible evidence and commitment scope."
+    },
+    {
+      "id": "AUD-06",
+      "surface": "XtraByte trust",
+      "finding": "Verify credentials and partnership status; avoid hover lift on inert blocks."
+    },
+    {
+      "id": "AUD-07",
+      "surface": "Vigilon mobile hero",
+      "finding": "Paragraph pushes main action near lower edge of first screen."
+    },
+    {
+      "id": "AUD-08",
+      "surface": "XtraByte mobile layout",
+      "finding": "Observed document about 750px wide in a 390px viewport, associated with offscreen navigation."
+    },
+    {
+      "id": "AUD-09",
+      "surface": "Vigilon mobile menu",
+      "finding": "Opened visually but toggle remained announced as collapsed."
+    },
+    {
+      "id": "AUD-10",
+      "surface": "Vigilon quote introduction",
+      "finding": "Helpful process, ambiguous 24-hour timing; form below initial viewport."
+    },
+    {
+      "id": "AUD-11",
+      "surface": "Vigilon quote form",
+      "finding": "Many contact fields before product context; keep direct route but simplify discovery."
+    }
+  ],
+  "analytics": {
+    "primary_objective": "Qualified next steps and opportunities; time on page alone is not success.",
+    "funnel": [
+      "task_card_viewed",
+      "tool_started",
+      "tool_completed",
+      "result_action_selected",
+      "inquiry_submitted",
+      "qualified_opportunity"
+    ],
+    "diagnostics": [
+      "Question-level abandonment",
+      "I’m not sure frequency",
+      "Answer corrections after results",
+      "Recommended-service fit in later scoping",
+      "Repeated scoping effort",
+      "Continuum demo interest",
+      "Mobile completion"
+    ],
+    "implementation": [
+      "Use existing consent and analytics arrangements.",
+      "Keep product answers, free text, vulnerability information, and personal data out of general analytics and session recordings.",
+      "Track coarse identifiers such as tool ID, step ID, action ID, and device class where appropriate.",
+      "Do not report qualified opportunities from a browser click alone; use actual downstream qualification data.",
+      "Assess modest-traffic sites with representative usability sessions before relying on underpowered A/B tests.",
+      "Test message, task placement, and motion separately when sample sizes support experiments."
+    ]
+  },
+  "content_inputs_needed": [
+    {
+      "id": "INPUT-01",
+      "item": "Target Astro repository",
+      "blocks": "Repository implementation",
+      "fallback": "Prepare portable artifacts; ask for the intended path if not identifiable."
+    },
+    {
+      "id": "INPUT-02",
+      "item": "Validated applicability logic and responsible reviewer",
+      "blocks": "Production regulatory determinations",
+      "fallback": "Build UI with explicitly marked local fixtures."
+    },
+    {
+      "id": "INPUT-03",
+      "item": "Continuum feature inventory and actual approved screenshots",
+      "blocks": "Specific software claims and product demo",
+      "fallback": "Use only confirmed broad description; do not fabricate interface screenshots."
+    },
+    {
+      "id": "INPUT-04",
+      "item": "Approved credentials, partnerships, samples, and case studies",
+      "blocks": "Publishing those proof claims/assets",
+      "fallback": "Omit unavailable evidence from production; no fabricated testimonials or logos."
+    },
+    {
+      "id": "INPUT-05",
+      "item": "Confirmed phone number, response promise, and commercial terms",
+      "blocks": "Publishing disputed or unverified details",
+      "fallback": "Preserve known working contact route and avoid new promises."
+    },
+    {
+      "id": "INPUT-06",
+      "item": "Approved MP4 or additional slideshow images",
+      "blocks": "Actual moving hero or multi-image slideshow",
+      "fallback": "Ship supplied static artwork."
+    },
+    {
+      "id": "INPUT-07",
+      "item": "Working inquiry/email/analytics integrations",
+      "blocks": "Related external delivery or tracking features",
+      "fallback": "Reuse existing verified integrations; label unavailable functions during local development and omit dead production controls."
+    }
+  ],
+  "implementation_plan": [
+    {
+      "id": "PHASE-01",
+      "priority": "P0",
+      "title": "Preflight and inventory",
+      "depends_on": [],
+      "deliverables": [
+        "Repository inspection",
+        "Route/content/asset inventory",
+        "Confirmed implementation assumptions and blockers"
+      ]
+    },
+    {
+      "id": "PHASE-02",
+      "priority": "P0",
+      "title": "Design and build result structure first",
+      "depends_on": [
+        "PHASE-01"
+      ],
+      "deliverables": [
+        "CRA result schema and view",
+        "Editable answer summary",
+        "Relevant service matching model",
+        "Explicit uncertainty states"
+      ]
+    },
+    {
+      "id": "PHASE-03",
+      "priority": "P0",
+      "title": "Shared guided-tool infrastructure",
+      "depends_on": [
+        "PHASE-02"
+      ],
+      "deliverables": [
+        "Question model",
+        "Session state",
+        "Navigation and branching",
+        "Accessible step rendering",
+        "Versioned rule interface"
+      ]
+    },
+    {
+      "id": "PHASE-04",
+      "priority": "P0",
+      "title": "Implement four tool journeys",
+      "depends_on": [
+        "PHASE-03"
+      ],
+      "deliverables": [
+        "RED scope",
+        "CRA scope",
+        "CRA roadmap",
+        "Reporting readiness",
+        "Validated rules where available; explicit nonproduction fixtures otherwise"
+      ]
+    },
+    {
+      "id": "PHASE-05",
+      "priority": "P1",
+      "title": "Homepage, navigation, and service architecture",
+      "depends_on": [
+        "PHASE-01",
+        "PHASE-02"
+      ],
+      "deliverables": [
+        "Reordered homepage",
+        "Task cards",
+        "Offer pages and navigation",
+        "Mobile fixes",
+        "Static hero integration"
+      ]
+    },
+    {
+      "id": "PHASE-06",
+      "priority": "P1",
+      "title": "Continuum, proof, and follow-up",
+      "depends_on": [
+        "PHASE-04",
+        "PHASE-05"
+      ],
+      "deliverables": [
+        "Verified platform content",
+        "Approved evidence",
+        "Inquiry context reuse",
+        "Working save/print path",
+        "Configured optional delivery"
+      ]
+    },
+    {
+      "id": "PHASE-07",
+      "priority": "P1",
+      "title": "Verification and handoff",
+      "depends_on": [
+        "PHASE-06"
+      ],
+      "deliverables": [
+        "Relevant tests and build checks",
+        "Desktop/mobile review",
+        "Accessibility checks",
+        "Performance baseline",
+        "Change summary and unresolved launch blockers"
+      ]
+    },
+    {
+      "id": "PHASE-08",
+      "priority": "P2",
+      "title": "Motion polish",
+      "depends_on": [
+        "PHASE-05"
+      ],
+      "deliverables": [
+        "Approved MP4 integration or approved slideshow",
+        "Fallback, pause, offscreen behavior",
+        "Loop and cross-device inspection"
+      ],
+      "optional": true
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-01",
+      "priority": "P0",
+      "criterion": "Homepage statistics strip removed and replaced by four clear guided starts."
+    },
+    {
+      "id": "AC-02",
+      "priority": "P0",
+      "criterion": "All four offers understandable, with working direct service and contact routes."
+    },
+    {
+      "id": "AC-03",
+      "priority": "P0",
+      "criterion": "Each checker has a dedicated route, focused dynamic steps, and immediate useful results."
+    },
+    {
+      "id": "AC-04",
+      "priority": "P0",
+      "criterion": "Browser and in-tool navigation preserve answers; refresh restores session progress."
+    },
+    {
+      "id": "AC-05",
+      "priority": "P0",
+      "criterion": "Upstream answer changes clear invalid dependent answers and recalculate results."
+    },
+    {
+      "id": "AC-06",
+      "priority": "P0",
+      "criterion": "Unknown and exceptional cases are explained without false certainty or fake compliance scores."
+    },
+    {
+      "id": "AC-07",
+      "priority": "P0",
+      "criterion": "Production outcomes are grounded in reviewed, versioned rules with current source references."
+    },
+    {
+      "id": "AC-08",
+      "priority": "P0",
+      "criterion": "No contact gate before results; any follow-up carries relevant prior answers without re-entry."
+    },
+    {
+      "id": "AC-09",
+      "priority": "P0",
+      "criterion": "No invented Continuum features, official affiliations, accreditations, customer claims, or testimonials."
+    },
+    {
+      "id": "AC-10",
+      "priority": "P1",
+      "criterion": "Hero text/actions stationary; mobile text precedes artwork; controls hidden for one slide."
+    },
+    {
+      "id": "AC-11",
+      "priority": "P1",
+      "criterion": "Any continuous motion has pause and reduced-motion fallback; optional media failure leaves the page usable."
+    },
+    {
+      "id": "AC-12",
+      "priority": "P1",
+      "criterion": "Keyboard/touch flows work; focus moves correctly; menus expose accurate expanded state."
+    },
+    {
+      "id": "AC-13",
+      "priority": "P1",
+      "criterion": "No unintended horizontal scrolling at 320px, 390px, 768px, and representative desktop widths; zoom/reflow checked."
+    },
+    {
+      "id": "AC-14",
+      "priority": "P1",
+      "criterion": "Text and controls meet applicable contrast requirements in all states."
+    },
+    {
+      "id": "AC-15",
+      "priority": "P1",
+      "criterion": "No dead CTAs, fake downloads, or silent form submissions; public data handling matches actual implementation."
+    },
+    {
+      "id": "AC-16",
+      "priority": "P1",
+      "criterion": "Existing useful links remain valid or receive deliberate redirects; no unnecessary framework migration."
+    },
+    {
+      "id": "AC-17",
+      "priority": "P1",
+      "criterion": "Appropriate repository checks pass and changed journeys are visually verified; report limitations accurately."
+    },
+    {
+      "id": "AC-18",
+      "priority": "P1",
+      "criterion": "Performance measured and documented against stated targets; no unmeasured performance or conversion claims."
+    }
+  ],
+  "verification_plan": {
+    "representative_visitors": [
+      "Compliance lead",
+      "Product engineer",
+      "Software vendor",
+      "Manufacturer new to EU requirements",
+      "Existing customer"
+    ],
+    "usability_tasks": [
+      "Find relevant support for a connected product",
+      "Distinguish testing from documentation",
+      "Find reporting support",
+      "Complete a check with an unknown answer",
+      "Review/edit and print or share a result through an implemented path"
+    ],
+    "automated_checks": [
+      "Existing relevant build/type/lint scripts",
+      "Meaningful branching and rule boundary tests",
+      "Navigation, persistence, and result consistency",
+      "Configured form behavior"
+    ],
+    "manual_checks": [
+      "Desktop/mobile screenshots",
+      "Keyboard and focus order",
+      "Screen-reader announcements where tools permit",
+      "Reduced motion",
+      "Hero media fallback",
+      "Browser Back/Forward and refresh",
+      "Changed-answer invalidation",
+      "Error recovery"
+    ],
+    "final_report": [
+      "Files and behavior changed",
+      "Checks actually run and outcomes",
+      "Inputs still missing",
+      "Regulatory or platform claims awaiting verification",
+      "Any launch blockers",
+      "No claim of production deployment unless separately authorized and completed"
+    ]
+  },
+  "sources": [
+    {
+      "id": "SRC-01",
+      "url": "https://www.vigiloncyber.com/",
+      "role": "Primary brand and current content",
+      "inspected_at": "2026-09-12"
+    },
+    {
+      "id": "SRC-02",
+      "url": "https://xtrabyte.com/",
+      "role": "Motion/hover reference; do not transfer broad positioning",
+      "inspected_at": "2026-09-12"
+    },
+    {
+      "id": "SRC-03",
+      "url": "https://www.vigiloncyber.com/request-quote",
+      "role": "Existing inquiry flow",
+      "inspected_at": "2026-09-12"
+    },
+    {
+      "id": "SRC-04",
+      "url": "https://design-system.service.gov.uk/patterns/question-pages/",
+      "role": "Question-flow UX guidance"
+    },
+    {
+      "id": "SRC-05",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/cra-summary",
+      "role": "Official CRA scope and dates; reverify"
+    },
+    {
+      "id": "SRC-06",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/cra-reporting",
+      "role": "Official CRA reporting guidance; reverify"
+    },
+    {
+      "id": "SRC-07",
+      "url": "https://single-market-economy.ec.europa.eu/sectors/electrical-and-electronic-engineering-industries-eei/radio-equipment-directive-red_en",
+      "role": "Official RED guidance; reverify"
+    },
+    {
+      "id": "SRC-08",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+      "role": "Contrast"
+    },
+    {
+      "id": "SRC-09",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html",
+      "role": "Automatic motion"
+    },
+    {
+      "id": "SRC-10",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus.html",
+      "role": "Hover/focus content"
+    },
+    {
+      "id": "SRC-11",
+      "url": "https://web.dev/articles/vitals",
+      "role": "Performance targets"
+    },
+    {
+      "id": "SRC-12",
+      "url": "https://docs.astro.build/en/guides/images/",
+      "role": "Astro image integration"
+    },
+    {
+      "id": "SRC-13",
+      "url": "https://docs.astro.build/en/guides/client-side-scripts/",
+      "role": "Astro script integration"
+    },
+    {
+      "id": "SRC-14",
+      "url": "https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide",
+      "role": "Optional AI motion workflow"
+    }
+  ]
+}

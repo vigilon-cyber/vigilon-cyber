@@ -1,138 +1,171 @@
 ---
 const pathname = Astro.url.pathname;
+
+const solutions = [
+  {
+    href: '/services/red-cyber-compliance',
+    title: 'RED Cybersecurity Testing',
+    text: 'Radio Equipment Directive testing against EN 18031',
+  },
+  {
+    href: '/services/cyber-resilience-act',
+    title: 'CRA Readiness & Technical Documentation',
+    text: 'Cyber Resilience Act gap analysis, evidence and documentation',
+  },
+  {
+    href: '/services#other-assessments',
+    title: 'Other Standards & Security Assessments',
+    text: 'ETSI EN 303 645, penetration testing, risk assessment, scanning',
+  },
+];
+
+const resources = [
+  { href: '/resources#tools', title: 'Guided compliance checks', text: 'RED and CRA scope, CRA roadmap, reporting readiness' },
+  { href: '/blog', title: 'Guides', text: 'Articles on RED, CRA and product security' },
+  { href: '/faq', title: 'FAQ', text: 'Answers to common questions' },
+];
+
+const inSolutions = pathname.startsWith('/services') || pathname === '/packages';
+const inResources = ['/resources', '/blog', '/faq', '/tools'].some((path) => pathname.startsWith(path));
+const current = (href: string) => (pathname === href ? 'page' : undefined);
 ---
 
-<header class="site-header" slot="header">
+<header class="site-header">
   <div class="header-inner">
-    <a href="/" class="logo" aria-label="Vigilon Cyber home">
-      <img src="/favicon.svg" alt="Vigilon Cyber" width="28" height="28" />
+    <a href="/" class="logo">
+      <img src="/favicon.svg" alt="" width="28" height="28" />
       Vigilon <span>Cyber</span>
     </a>
 
-    <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <line x1="3" y1="6" x2="21" y2="6"/>
-        <line x1="3" y1="12" x2="21" y2="12"/>
-        <line x1="3" y1="18" x2="21" y2="18"/>
+    <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span class="sr-only">Menu</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
       </svg>
     </button>
 
-    <nav>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
       <ul class="nav-links">
-        <li><a href="/" class={pathname === '/' ? 'active' : ''}>Home</a></li>
-        
-        <!-- Services Dropdown -->
         <li class="nav-dropdown">
-          <a href="/services" class={pathname.startsWith('/services') ? 'active' : ''}>
-            Services
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-left:4px;vertical-align:middle;">
-              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <button type="button" class:list={['nav-trigger', { active: inSolutions }]} aria-expanded="false" aria-controls="menu-solutions" data-menu-trigger>
+            Solutions
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-          </a>
-          <div class="dropdown-menu">
-            <a href="/services/red-cyber-compliance">
-              <img src="/icons/certificate.svg" alt="" class="dropdown-icon" />
-              <div>
-                <strong>RED Cyber CE Mark Testing</strong>
-                <span>EN 18031 compliance for CE marking</span>
-              </div>
-            </a>
-            <a href="/services/cyber-resilience-act">
-              <img src="/icons/shield.svg" alt="" class="dropdown-icon" />
-              <div>
-                <strong>Cyber Resilience Act Prep</strong>
-                <span>EU CRA readiness assessment</span>
-              </div>
-            </a>
-            <a href="/services/etsi-iot-security">
-              <img src="/icons/network.svg" alt="" class="dropdown-icon" />
-              <div>
-                <strong>ETSI IoT Security</strong>
-                <span>EN 303 645 baseline security</span>
-              </div>
-            </a>
-            <a href="/services/penetration-testing">
-              <img src="/icons/target.svg" alt="" class="dropdown-icon" />
-              <div>
-                <strong>Penetration Testing</strong>
-                <span>Exploit vulnerabilities before attackers</span>
-              </div>
-            </a>
-            <a href="/services/risk-assessment">
-              <img src="/icons/chart.svg" alt="" class="dropdown-icon" />
-              <div>
-                <strong>Risk Assessment</strong>
-                <span>STRIDE threat modeling</span>
-              </div>
-            </a>
-            <a href="/services/vulnerability-scanning">
-              <img src="/icons/search.svg" alt="" class="dropdown-icon" />
-              <div>
-                <strong>Vulnerability Scanning</strong>
-                <span>Continuous security monitoring</span>
-              </div>
-            </a>
-            <a href="/services" class="dropdown-view-all">
-              View All Services →
-            </a>
+          </button>
+          <div class="dropdown-menu" id="menu-solutions" hidden>
+            <ul>
+              {solutions.map((item) => (
+                <li>
+                  <a href={item.href} aria-current={current(item.href)}>
+                    <strong>{item.title}</strong>
+                    <span>{item.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a href="/services" class="dropdown-view-all" aria-current={current('/services')}>All services</a>
           </div>
         </li>
 
-        <!-- Packages Dropdown -->
+        <li><a href="/continuum" class:list={{ active: pathname === '/continuum' }} aria-current={current('/continuum')}>Vigilon Continuum</a></li>
+
         <li class="nav-dropdown">
-          <a href="/packages" class={pathname === '/packages' ? 'active' : ''}>
-            Packages
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-left:4px;vertical-align:middle;">
-              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <button type="button" class:list={['nav-trigger', { active: inResources }]} aria-expanded="false" aria-controls="menu-resources" data-menu-trigger>
+            Resources
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-          </a>
-          <div class="dropdown-menu dropdown-menu-packages">
-            <a href="/packages#essentials">
-              <div>
-                <strong>Essentials</strong>
-                <span>Gap analysis & guidance</span>
-              </div>
-            </a>
-            <a href="/packages#professional">
-              <div>
-                <strong>Professional</strong>
-                <span class="badge-popular">Most Popular</span>
-                <span>Full compliance assessment</span>
-              </div>
-            </a>
-            <a href="/packages#enterprise">
-              <div>
-                <strong>Enterprise</strong>
-                <span>Complete security package</span>
-              </div>
-            </a>
+          </button>
+          <div class="dropdown-menu" id="menu-resources" hidden>
+            <ul>
+              {resources.map((item) => (
+                <li>
+                  <a href={item.href} aria-current={current(item.href)}>
+                    <strong>{item.title}</strong>
+                    <span>{item.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a href="/resources" class="dropdown-view-all" aria-current={current('/resources')}>All resources</a>
           </div>
         </li>
 
-        <li><a href="/blog" class={pathname.startsWith('/blog') ? 'active' : ''}>Blog</a></li>
-        <li><a href="/faq" class={pathname === '/faq' ? 'active' : ''}>FAQ</a></li>
-        <li><a href="/request-quote" class="nav-cta">Get a Quote</a></li>
+        <li><a href="/about" class:list={{ active: pathname === '/about' }} aria-current={current('/about')}>About</a></li>
+        <li><a href="/request-quote" class="nav-cta">Talk to an expert</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<style>
-  .dropdown-icon {
-    width: 20px;
-    height: 20px;
-    opacity: 0.7;
-    flex-shrink: 0;
+<script>
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const toggle = header?.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const nav = header?.querySelector<HTMLElement>('#site-nav');
+  const triggers = Array.from(header?.querySelectorAll<HTMLButtonElement>('[data-menu-trigger]') ?? []);
+
+  const isOpen = (button: HTMLButtonElement) => button.getAttribute('aria-expanded') === 'true';
+
+  const setMenu = (trigger: HTMLButtonElement, open: boolean) => {
+    trigger.setAttribute('aria-expanded', String(open));
+    const menu = document.getElementById(trigger.getAttribute('aria-controls') ?? '');
+    if (menu) menu.hidden = !open;
+  };
+
+  const closeMenus = (except?: HTMLButtonElement) => triggers.forEach((trigger) => trigger !== except && setMenu(trigger, false));
+
+  const setNav = (open: boolean) => {
+    if (!toggle || !nav) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    nav.classList.toggle('open', open);
+    if (!open) closeMenus();
+  };
+
+  if (header) {
+    triggers.forEach((trigger) =>
+      trigger.addEventListener('click', () => {
+        const open = !isOpen(trigger);
+        closeMenus(trigger);
+        setMenu(trigger, open);
+      }),
+    );
+
+    toggle?.addEventListener('click', () => setNav(!isOpen(toggle)));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      const openTrigger = triggers.find(isOpen);
+      if (openTrigger) {
+        setMenu(openTrigger, false);
+        openTrigger.focus();
+      } else if (toggle && isOpen(toggle)) {
+        setNav(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!header.contains(event.target as Node)) {
+        closeMenus();
+        if (toggle && isOpen(toggle)) setNav(false);
+      }
+    });
+
+    // Close a dropdown when keyboard focus moves out of it.
+    header.addEventListener('focusout', (event) => {
+      const next = event.relatedTarget as Node | null;
+      if (!next) return;
+      triggers.forEach((trigger) => {
+        const item = trigger.closest('li');
+        if (item && !item.contains(next)) setMenu(trigger, false);
+      });
+    });
+
+    window.matchMedia('(min-width: 961px)').addEventListener('change', (query) => {
+      if (query.matches) setNav(false);
+    });
   }
-  
-  .badge-popular {
-    display: inline-block;
-    background: var(--color-cta);
-    color: var(--color-white);
-    font-size: 0.65rem;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-weight: 600;
-    margin-left: 6px;
-  }
-</style>
+</script>

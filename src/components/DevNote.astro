@@ -1,0 +1,43 @@
+---
+/**
+ * Implementation note rendered only by `astro dev`. Use it to mark content
+ * that is waiting for owner input so reviewers can see the gap locally
+ * without it ever reaching a production build.
+ */
+interface Props {
+  inputs?: string[];
+}
+
+const { inputs = [] } = Astro.props;
+---
+
+{import.meta.env.DEV && (
+  <aside class="dev-note" aria-label="Local implementation note">
+    <p class="dev-note-label">
+      Local development only{inputs.length > 0 && ` · Waiting on ${inputs.join(', ')}`}
+    </p>
+    <div class="dev-note-body"><slot /></div>
+  </aside>
+)}
+
+<style>
+  .dev-note {
+    margin: 1.5rem 0;
+    padding: 0.875rem 1rem;
+    border: 2px dashed #8a6100;
+    border-radius: var(--radius);
+    background: #fff8e1;
+    color: #3d2b00;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .dev-note-label {
+    margin: 0 0 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .dev-note-body :global(p) { margin: 0; }
+</style>

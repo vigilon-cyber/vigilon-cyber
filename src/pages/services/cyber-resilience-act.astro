@@ -2,91 +2,121 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { toolLinkOr } from '../../lib/tools/registry.ts';
 
-const title = 'Cyber Resilience Act (CRA) Readiness | Vigilon Cyber';
-const description = 'Prepare your products for the EU Cyber Resilience Act. Vigilon Cyber provides gap analysis, vulnerability handling, SBOM management, and conformity assessment preparation for CRA compliance.';
+const title = 'CRA Readiness & Technical Documentation | Vigilon Cyber';
+const description = 'Prepare for the EU Cyber Resilience Act (CRA): gap analysis, vulnerability handling and reporting processes, SBOM management, technical documentation and conformity assessment preparation.';
+
+const env = { dev: import.meta.env.DEV, previewFlag: import.meta.env.PUBLIC_GUIDED_TOOLS_PREVIEW };
+const roadmapLink = toolLinkOr('cra-roadmap', '/request-quote', env);
+const scopeLink = toolLinkOr('cra-scope', '/request-quote', env);
+const reportingLink = toolLinkOr('reporting-readiness', '#vulnerability-handling', env);
 ---
 
 <BaseLayout title={title} description={description}>
-  <Header />
+  <Header slot="header" />
 
   <section class="page-header">
     <div class="container">
       <div class="breadcrumb">
-        <a href="/">Home</a><span>/</span><a href="/services">Services</a><span>/</span><strong>Cyber Resilience Act</strong>
+        <a href="/">Home</a><span>/</span><a href="/services">Services</a><span>/</span><strong>CRA Readiness &amp; Technical Documentation</strong>
       </div>
-      <h1>Cyber Resilience Act Readiness</h1>
-      <p>Navigate the EU's landmark cybersecurity regulation with confidence. We help manufacturers prepare their products and processes for CRA compliance.</p>
+      <h1>CRA Readiness &amp; Technical Documentation</h1>
+      <p>Identify gaps against the EU Cyber Resilience Act (CRA), plan the work, and assemble the evidence and technical documentation — sometimes called a technical dossier — that the CRA requires.</p>
+      <div class="header-actions">
+        <a href={roadmapLink} class="btn btn-primary">Build my CRA roadmap</a>
+        <a href={scopeLink} class="btn btn-outline">Check CRA scope</a>
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container prose">
-      <h2>What Is the Cyber Resilience Act?</h2>
-      <p>The <strong>Cyber Resilience Act (CRA)</strong> — Regulation (EU) 2024/2847 — is the EU's horizontal cybersecurity regulation for products with digital elements. It establishes mandatory cybersecurity requirements covering the entire product lifecycle, from design and development through to end-of-life.</p>
-      <p>The CRA applies to virtually all hardware and software products with digital elements placed on the EU market, with specific obligations for manufacturers, importers, and distributors.</p>
+      <div class="notice">
+        <h2>Reporting obligations already apply</h2>
+        <p>Since 11&nbsp;September&nbsp;2026, manufacturers must report actively exploited vulnerabilities and severe incidents affecting their products through the EU Single Reporting Platform — including for products already on the market. <a href={reportingLink}>Check your reporting readiness</a>.</p>
+      </div>
 
-      <h2>Key CRA Requirements</h2>
-      <h3>Security by Design</h3>
+      <h2>What is the Cyber Resilience Act?</h2>
+      <p>The <strong>Cyber Resilience Act (CRA)</strong> — Regulation (EU) 2024/2847 — is the EU’s horizontal cybersecurity regulation for products with digital elements. It sets cybersecurity requirements for the design, development and production of those products, and for how manufacturers handle vulnerabilities while the products are in use.</p>
+      <p>It covers hardware and software products, including their remote data processing solutions, that are made available on the EU market and can connect to a device or network. Some products are excluded, such as those covered by the EU medical device and vehicle type-approval regulations. It sets obligations for manufacturers, importers and distributors.</p>
+
+      <h2>Key dates</h2>
       <ul>
-        <li>Products must be designed and developed with appropriate cybersecurity measures</li>
-        <li>Default configurations must be secure</li>
-        <li>Vulnerabilities must be handled systematically throughout the support period</li>
+        <li><strong>10 December 2024:</strong> the CRA entered into force.</li>
+        <li><strong>11 June 2026:</strong> provisions on conformity assessment bodies apply.</li>
+        <li><strong>11 September 2026:</strong> manufacturers’ reporting obligations apply.</li>
+        <li><strong>11 December 2027:</strong> the remaining provisions apply.</li>
       </ul>
 
-      <h3>Vulnerability Handling</h3>
+      <h2>What manufacturers need to do</h2>
+      <h3>Security by design</h3>
       <ul>
-        <li>Manufacturers must establish coordinated vulnerability disclosure policies</li>
-        <li>Security updates must be provided for at least 5 years (or the product lifetime)</li>
-        <li>Actively exploited vulnerabilities must be reported to ENISA within 24 hours</li>
+        <li>Assess and document the product’s cybersecurity risks, and use that assessment through planning, design, development, production, delivery and maintenance.</li>
+        <li>Meet the essential cybersecurity requirements in Annex I — for example, making the product available without known exploitable vulnerabilities and with a secure-by-default configuration.</li>
       </ul>
 
-      <h3>Software Bill of Materials (SBOM)</h3>
+      <h3>Vulnerability handling</h3>
       <ul>
-        <li>Manufacturers must document and maintain an SBOM for each product</li>
-        <li>SBOMs must be machine-readable and include all top-level dependencies</li>
-        <li>Enables rapid vulnerability identification across the software supply chain</li>
+        <li>Put in place and enforce a coordinated vulnerability disclosure policy, and provide a contact address for reporting vulnerabilities.</li>
+        <li>Draw up a software bill of materials (SBOM) in a commonly used, machine-readable format, covering at least the product’s top-level dependencies.</li>
+        <li>Provide security updates without delay and free of charge during the support period, which is at least five years unless the product is expected to be in use for less time.</li>
       </ul>
 
-      <h3>Conformity Assessment</h3>
+      <h3>Reporting</h3>
       <ul>
-        <li><strong>Default products:</strong> Self-assessment (Module A)</li>
-        <li><strong>Important products (Class I):</strong> Harmonised standard or third-party assessment</li>
-        <li><strong>Important products (Class II) &amp; Critical products:</strong> Third-party assessment required</li>
+        <li>For an actively exploited vulnerability: an early warning within 24 hours of becoming aware, a notification within 72 hours, and a final report within 14 days of a corrective or mitigating measure being available.</li>
+        <li>For a severe incident: an early warning within 24 hours, an incident notification within 72 hours, and a final report within one month of the notification.</li>
+        <li>Notifications go through the Single Reporting Platform to the CSIRT of the Member State of your main EU establishment, and are accessible to ENISA at the same time.</li>
       </ul>
 
-      <h2>Our CRA Readiness Services</h2>
-      <h3>CRA Gap Analysis</h3>
-      <p>We assess your current product security posture and development processes against every essential requirement in Annex I of the CRA. You receive a prioritised roadmap to compliance.</p>
-
-      <h3>Vulnerability Handling Process Design</h3>
-      <p>We help you design and implement vulnerability handling procedures that meet CRA Article 13 requirements, including coordinated disclosure, incident response, and ENISA notification workflows.</p>
-
-      <h3>SBOM Management</h3>
-      <p>We help establish SBOM generation, maintenance and distribution processes that satisfy CRA documentation requirements and enable effective supply-chain risk management.</p>
-
-      <h3>Conformity Assessment Preparation</h3>
-      <p>Whether your product falls under default, Class I or Class II — we prepare you for the appropriate conformity assessment route, including Notified Body examination where required.</p>
-
-      <h2>CRA Timeline</h2>
-      <p>The CRA entered into force on 10 December 2024. Key dates:</p>
+      <h3>Conformity assessment</h3>
       <ul>
-        <li><strong>11 June 2026:</strong> Conformity assessment body provisions apply</li>
-        <li><strong>11 September 2026:</strong> Vulnerability reporting obligations apply</li>
-        <li><strong>11 December 2027:</strong> All provisions apply in full</li>
+        <li><strong>Most products:</strong> internal control (module&nbsp;A) is available.</li>
+        <li><strong>Important products, class I:</strong> internal control only where harmonised standards, common specifications or a European cybersecurity certification scheme are fully applied; otherwise third-party assessment.</li>
+        <li><strong>Important products, class II:</strong> third-party assessment, or a European cybersecurity certification scheme where available.</li>
+        <li><strong>Critical products:</strong> a European cybersecurity certificate where required by delegated act; otherwise the class II procedures.</li>
       </ul>
 
-      <blockquote>
-        "The CRA is the most significant horizontal cybersecurity regulation the EU has ever introduced. Manufacturers who start preparing now will have a clear competitive advantage."
-      </blockquote>
+      <h2>Our CRA services</h2>
+      <h3 id="gap-analysis">CRA gap analysis</h3>
+      <p>We assess your current product security and development processes against the essential requirements in Annex I of the CRA. You receive a prioritised plan for the work.</p>
 
-      <p>See also our <a href="/services/en-18031-compliance">EN 18031-1 compliance testing</a> for products that also fall under the Radio Equipment Directive, and our <a href="/services/risk-assessment">risk assessment services</a> to support your CRA security-by-design obligations.</p>
+      <h3 id="technical-documentation">Technical documentation</h3>
+      <p>We help you assemble the technical documentation the CRA requires — the product description, design and vulnerability handling information, the cybersecurity risk assessment, the basis for the support period, the standards applied and test reports — and keep it ready for market surveillance authorities.</p>
+
+      <h3 id="vulnerability-handling">Vulnerability handling and reporting process design</h3>
+      <p>We help you design and implement vulnerability handling procedures, including coordinated disclosure, incident response and the notification workflow for the Single Reporting Platform.</p>
+
+      <h3 id="sbom">SBOM management</h3>
+      <p>We help establish SBOM generation, maintenance and distribution processes that meet CRA documentation requirements and support supply-chain risk management.</p>
+
+      <h3 id="conformity-assessment-preparation">Conformity assessment preparation</h3>
+      <p>Whether your product is a default, class&nbsp;I, class&nbsp;II or critical product, we prepare you for the conformity assessment route that applies, including Notified Body examination where required.</p>
+
+      <h3 id="conformity-assessment">Conformity assessment</h3>
+      <p>Document and SDLC review and hands-on penetration testing that produces test reports that feed evidence in your technical documentation.</p>
+
+      <h2>Ongoing reporting with Vigilon Continuum</h2>
+      <p>Vigilon Continuum is our SaaS reporting platform. It is separate from the EU’s official Single Reporting Platform. <a href="/continuum">About Vigilon Continuum</a>.</p>
+
+      <p>See also our <a href="/services/red-cyber-compliance">RED cybersecurity testing</a> for radio products, and our <a href="/services/risk-assessment">risk assessment services</a> for the cybersecurity risk assessment the CRA requires.</p>
+
+      <p class="sources">Sources: Regulation (EU) 2024/2847, Articles 2, 13, 14, 32 and 71 and Annexes I and VII; European Commission, “Cyber Resilience Act: reporting obligations” (updated 11&nbsp;September&nbsp;2026). Checked 13&nbsp;September&nbsp;2026.</p>
 
       <div class="text-center mt-2">
-        <a href="/request-quote" class="btn btn-primary btn-lg">Get a CRA Readiness Quote</a>
+        <a href={roadmapLink} class="btn btn-primary btn-lg">Build my CRA roadmap</a>
       </div>
     </div>
   </section>
 
-  <Footer />
+  <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  .header-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+  .notice { margin-bottom: 2.5rem; padding: 1.25rem 1.5rem; border-left: 4px solid var(--color-intelligent-blue); border-radius: 0 var(--radius) var(--radius) 0; background: var(--color-surface); }
+  .notice h2 { margin-top: 0; font-size: 1.25rem; }
+  .notice p { margin-bottom: 0; }
+  .sources { margin-top: 2rem; font-size: 0.9rem; color: var(--color-text-light); }
+</style>

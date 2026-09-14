@@ -8,7 +8,7 @@ const description = 'Request a no-obligation quote for EN 18031 compliance testi
 ---
 
 <BaseLayout title={title} description={description}>
-  <Header />
+  <Header slot="header" />
 
   <section class="page-header">
     <div class="container">
@@ -17,6 +17,7 @@ const description = 'Request a no-obligation quote for EN 18031 compliance testi
       </div>
       <h1>Request a Quote</h1>
       <p>Tell us about your product and compliance needs. We'll respond with a detailed, no-obligation quote within 24 hours.</p>
+      <p class="quote-alt">Not sure what you need yet? <a href="/#guided-starts">Try a guided check</a> — you’ll see a result without sharing contact details.</p>
     </div>
   </section>
 
@@ -89,8 +90,9 @@ const description = 'Request a no-obligation quote for EN 18031 compliance testi
           <label for="service">Which service(s) are you interested in? *</label>
           <select id="service" name="service" required>
             <option value="">Select a service</option>
-            <option value="en-18031">EN 18031 Compliance Testing</option>
-            <option value="cra">Cyber Resilience Act Readiness</option>
+            <option value="en-18031">RED Cybersecurity Testing (EN 18031)</option>
+            <option value="cra">CRA Readiness &amp; Technical Documentation</option>
+            <option value="continuum">Vigilon Continuum</option>
             <option value="etsi">ETSI EN 303 645 IoT Security</option>
             <option value="pentest">Penetration Testing</option>
             <option value="risk">Risk Assessment & Threat Modelling</option>
@@ -151,10 +153,19 @@ const description = 'Request a no-obligation quote for EN 18031 compliance testi
       </form>
 
       <script>
+        import { reportQuoteConversion } from '../lib/analytics.ts';
+
         const form = document.getElementById('quote-form') as HTMLFormElement | null;
         const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
         const successEl = document.getElementById('form-success') as HTMLElement | null;
         const errorEl = document.getElementById('form-error') as HTMLElement | null;
+        const serviceSelect = document.getElementById('service') as HTMLSelectElement | null;
+
+        // Pre-select a service from links such as /request-quote?service=continuum
+        const requestedService = new URLSearchParams(window.location.search).get('service');
+        if (requestedService && serviceSelect && Array.from(serviceSelect.options).some((option) => option.value === requestedService)) {
+          serviceSelect.value = requestedService;
+        }
 
         form?.addEventListener('submit', async (e) => {
           e.preventDefault();
@@ -180,11 +191,7 @@ const description = 'Request a no-obligation quote for EN 18031 compliance testi
               successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
               // Google Ads conversion — fires only on confirmed human submission
-              if (!isBot && typeof (window as any).gtag === 'function') {
-                (window as any).gtag('event', 'conversion', {
-                  send_to: 'AW-17513516704/jf6NCOzw-dAcEKCdjJ9B',
-                });
-              }
+              if (!isBot) reportQuoteConversion();
             } else {
               errorEl.style.display = 'block';
               submitBtn.disabled = false;
@@ -202,5 +209,9 @@ const description = 'Request a no-obligation quote for EN 18031 compliance testi
     </div>
   </section>
 
-  <Footer />
+  <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  .quote-alt { margin-top: 0.75rem; font-size: 1rem; }
+</style>

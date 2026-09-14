@@ -2,23 +2,38 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { toolLinkOr } from '../../lib/tools/registry.ts';
 
-const title = 'Cybersecurity Compliance Services | Vigilon Cyber';
-const description = 'Comprehensive cybersecurity compliance services including EN 18031 testing, CE marking, Cyber Resilience Act readiness, ETSI IoT security, penetration testing, risk assessments and vulnerability scanning.';
+const title = 'Services — RED Testing, CRA Documentation & Security Assessments | Vigilon Cyber';
+const description = 'RED cybersecurity testing, CRA readiness and technical documentation, Vigilon Continuum, and broader standards and security assessments including ETSI EN 303 645, penetration testing, risk assessment and vulnerability scanning.';
 
-const services = [
+const env = { dev: import.meta.env.DEV, previewFlag: import.meta.env.PUBLIC_GUIDED_TOOLS_PREVIEW };
+
+const offers = [
   {
-    title: 'RED CE Cyber Compliance Testing',
+    kind: 'Testing service',
+    title: 'RED Cybersecurity Testing',
     href: '/services/red-cyber-compliance',
-    description: 'Full compliance testing and gap analysis against EN 18031 for CE marking under the Radio Equipment Directive Delegated Act (RED DA 2022/30/EU). We support both self-declaration and Notified Body assessment pathways.',
-    tags: ['CE Marking', 'RED', 'EN 18031'],
+    description: 'Testing against the cybersecurity requirements of the EU Radio Equipment Directive (RED) using the EN 18031 harmonised standards, with support for self-declaration or Notified Body preparation.',
+    action: { label: 'Scope my RED testing', href: toolLinkOr('red-scope', '/request-quote', env) },
   },
   {
-    title: 'Cyber Resilience Act Readiness',
+    kind: 'Documentation service',
+    title: 'CRA Readiness & Technical Documentation',
     href: '/services/cyber-resilience-act',
-    description: 'Prepare your products and processes for the EU Cyber Resilience Act. We cover gap analysis, vulnerability handling procedures, SBOM management and conformity assessment preparation.',
-    tags: ['CRA', 'EU Regulation'],
+    description: 'Gap analysis against the EU Cyber Resilience Act (CRA), vulnerability handling and SBOM processes, and the technical documentation — technical dossier — the CRA requires.',
+    action: { label: 'Build my CRA roadmap', href: toolLinkOr('cra-roadmap', '/request-quote', env) },
   },
+  {
+    kind: 'Software',
+    title: 'Vigilon Continuum',
+    href: '/continuum',
+    description: 'Vigilon’s SaaS reporting platform. It is separate from the EU’s official Single Reporting Platform.',
+    action: null,
+  },
+];
+
+const assessments = [
   {
     title: 'ETSI EN 303 645 — IoT Security',
     href: '/services/etsi-iot-security',
@@ -28,62 +43,102 @@ const services = [
   {
     title: 'Penetration Testing',
     href: '/services/penetration-testing',
-    description: 'Regular penetration testing across web applications, APIs, mobile apps, IoT devices and cloud infrastructure. We follow OWASP, PTES and OSSTMM methodologies.',
+    description: 'Penetration testing across web applications, APIs, mobile apps, IoT devices and cloud infrastructure, following OWASP, PTES and OSSTMM methodologies.',
     tags: ['Web', 'API', 'IoT', 'Cloud'],
   },
   {
     title: 'Risk Assessment & Threat Modelling',
     href: '/services/risk-assessment',
-    description: 'Systematic risk assessments and threat modelling using STRIDE, DREAD and attack-tree methodologies to identify, prioritise and mitigate security risks across your product ecosystem.',
+    description: 'Systematic risk assessments and threat modelling using STRIDE, DREAD and attack-tree methodologies to identify, prioritise and mitigate security risks.',
     tags: ['STRIDE', 'Risk', 'Threat Model'],
   },
   {
     title: 'Vulnerability Scanning',
     href: '/services/vulnerability-scanning',
-    description: 'Continuous automated and manual vulnerability scanning services to monitor your external attack surface, internal networks and cloud environments.',
-    tags: ['Continuous', 'Automated', 'Monitoring'],
+    description: 'Automated and manual vulnerability scanning of your external attack surface, internal networks and cloud environments.',
+    tags: ['Scanning', 'Automated', 'Monitoring'],
   },
 ];
 ---
 
 <BaseLayout title={title} description={description}>
-  <Header />
+  <Header slot="header" />
 
   <section class="page-header">
     <div class="container">
       <div class="breadcrumb">
         <a href="/">Home</a><span>/</span><strong>Services</strong>
       </div>
-      <h1>Our Services</h1>
-      <p>End-to-end cybersecurity compliance and security testing services for connected products and digital infrastructure.</p>
+      <h1>Services</h1>
+      <p>Testing, technical documentation and ongoing reporting for connected products — plus broader standards and security assessments.</p>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" aria-labelledby="core-title">
     <div class="container">
+      <h2 id="core-title" class="services-heading">RED, CRA and ongoing reporting</h2>
+      <div class="grid grid-3">
+        {offers.map((offer) => (
+          <article class="card offer-card">
+            <p class="offer-kind">{offer.kind}</p>
+            <h3><a href={offer.href}>{offer.title}</a></h3>
+            <p>{offer.description}</p>
+            <div class="offer-links">
+              <a href={offer.href} class="btn btn-secondary">Learn more<span class="sr-only"> about {offer.title}</span></a>
+              {offer.action && <a href={offer.action.href}>{offer.action.label}</a>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="other-assessments" class="section section-alt" aria-labelledby="other-title">
+    <div class="container">
+      <h2 id="other-title" class="services-heading">Other standards &amp; security assessments</h2>
+      <p class="services-intro">Available on their own or alongside RED and CRA work.</p>
       <div class="grid grid-2">
-        {services.map(service => (
+        {assessments.map((service) => (
           <a href={service.href} class="card" style="text-decoration:none;color:inherit;">
-            <h2 style="font-size:1.35rem;margin-bottom:0.75rem;">{service.title}</h2>
+            <h3 class="assessment-title">{service.title}</h3>
             <p style="color:var(--color-text-light);margin-bottom:1rem;">{service.description}</p>
             <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-              {service.tags.map(tag => (
+              {service.tags.map((tag) => (
                 <span class="blog-tag">{tag}</span>
               ))}
             </div>
           </a>
         ))}
       </div>
+      <p class="packages-note">See how RED testing engagements are typically structured on our <a href="/packages">packages page</a>.</p>
     </div>
   </section>
 
   <section class="section section-dark">
     <div class="container text-center">
-      <h2>Not Sure What You Need?</h2>
-      <p style="color:var(--color-accent-light);max-width:560px;margin:1rem auto 2rem;">Book a free 30-minute consultation and we'll help you identify the right compliance pathway for your product.</p>
-      <a href="/request-quote" class="btn btn-white btn-lg">Request a Quote</a>
+      <h2>Not sure what you need?</h2>
+      <p style="color:var(--color-text-on-dark);max-width:560px;margin:1rem auto 2rem;">Answer a few questions in a guided check, or tell us about your product.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="/#guided-starts" class="btn btn-primary btn-lg">Find my compliance path</a>
+        <a href="/request-quote" class="btn btn-outline btn-lg">Request a quote</a>
+      </div>
     </div>
   </section>
 
-  <Footer />
+  <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  .services-heading { font-size: 1.75rem; margin-bottom: 1.5rem; color: var(--color-midnight-blue); }
+  .services-intro { margin: -1rem 0 1.5rem; color: var(--color-text-light); }
+  .offer-card { display: flex; flex-direction: column; gap: 0.5rem; }
+  .offer-kind { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-intelligent-blue); }
+  .offer-card h3 { font-size: 1.35rem; }
+  .offer-card h3 a { color: var(--color-midnight-blue); }
+  .offer-card h3 a:hover { text-decoration: underline; }
+  .offer-card > p:not(.offer-kind) { color: var(--color-text-light); flex: 1; }
+  .offer-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; margin-top: 0.75rem; }
+  .offer-links a:not(.btn) { font-weight: 600; min-height: 44px; display: inline-flex; align-items: center; }
+  .assessment-title { font-size: 1.35rem; margin-bottom: 0.75rem; color: var(--color-midnight-blue); }
+  .packages-note { margin-top: 2rem; color: var(--color-text-light); }
+</style>

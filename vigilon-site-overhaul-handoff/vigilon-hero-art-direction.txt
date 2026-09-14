@@ -1,0 +1,18 @@
+VIGILON HERO MASTER
+
+Generated with the built-in image generation tool.
+Deliverable: vigilon-hero-master.png
+Format: static PNG hero artwork, without embedded text.
+Composition: headline and buttons belong in the quiet left half; artwork occupies the right half.
+Mobile: place headline and actions above the artwork rather than cropping this entire wide composition behind text.
+Motion direction for a future video version: camera and core remain fixed; slow cyan light travels along the filaments, with restrained illumination of the glass layers. Preserve the dark text-safe area. Provide a static fallback and pause control.
+
+FINAL GENERATION PROMPT
+
+Use case: ads-marketing
+Asset type: final text-free website hero background for Vigilon Cyber, a premium product cybersecurity testing, CRA technical documentation and ongoing reporting company.
+Create one exceptionally refined cinematic 3D brand image, ultra-wide landscape, approximately 2.4:1, preferably 2880 x 1200. This is the actual artwork asset, not a webpage mockup.
+Composition: the entire left 52 percent is generous, extremely quiet dark midnight navy negative space for a large white headline, supporting text and buttons added later in HTML. Smooth near-black navy background #0B1F3F blending to #07080A; almost no detail in the left text-safe area. The purposeful visual occupies the right 48 percent, centered around x=76%, y=52%, with comfortable margins. No rigid division between the halves.
+Subject: an elegant precision-engineered connected-product core, a compact floating dark graphite and brushed titanium square module in three-quarter perspective, physically plausible fine machining and tiny subtle circuit traces. Above it, three thin offset translucent blue glass planes form a beautifully ordered stack, evoking verified evidence and technical documentation without depicting any actual UI. A single continuous sculptural stream of very fine cyan optical filaments flows in from the lower right, curves smoothly around the core and continues into the distance, evoking perpetual monitoring and continuity. Restrained, coherent geometry; one clear focal point. A few discrete warm orange #FF6B35 pinpoints at meaningful junctions, less than 2 percent of the artwork. Cyan #00D4FF edge light, intelligent steel-blue #1E5F8C midtones. Fine flowing lines borrow the tranquility of ocean currents, but this is sophisticated product-security artwork, not literal water.
+Art direction: premium industrial technology campaign, exceptionally tasteful, precise material rendering, elegant cinematic lighting, controlled highlights, subtle atmospheric depth, clean silhouette, believable glass refraction and soft reflection, excellent detail without clutter. Mature and trustworthy, calm intelligent engineering. The brightest light stays on the right. The background should blend seamlessly into a dark website. Broadly crop-tolerant; keep main form inside right central area.
+Constraints: NO text, letters, numbers, branding, logos, badges, shield icons, padlocks, checkmarks, globe, hacker hoodies, people, binary rain, fake dashboard panels, stock cybersecurity clipart, huge glowing rings, excessive bloom, purple neon, green neon, lens flare, watermark, border, split panels or collage. No headline or buttons in the image. One finished cohesive composition with impeccable text-safe negative space.
