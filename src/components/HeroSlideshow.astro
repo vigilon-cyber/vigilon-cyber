@@ -2,10 +2,15 @@
 /**
  * Homepage hero with stationary copy and actions over approved artwork.
  *
- * One image renders a static hero with no controls or motion. Pass more
- * approved images to enable a crossfade with previous/next/pause controls
- * (paused under prefers-reduced-motion, offscreen, or in a hidden tab).
- * Adapted from the handoff starter component.
+ * The static image always renders first: it is the LCP element, the fallback
+ * for reduced motion and Save-Data, and what stays visible if the video can't
+ * play. With `video`, a muted looping background video fades in over the
+ * image after the page has loaded, with a visible pause/play control. It
+ * pauses offscreen and in hidden tabs, and doesn't autoplay under
+ * prefers-reduced-motion or Save-Data (visitors can still choose Play).
+ *
+ * Without `video`, passing more approved images enables a crossfade with
+ * previous/next/pause controls. Adapted from the handoff starter component.
  */
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
@@ -15,10 +20,13 @@ interface Props {
   headline: string;
   description: string;
   images?: ImageMetadata[];
+  /** Public path to an H.264 MP4 with no audio track, framed like the first image. */
+  video?: string;
 }
 
-const { headline, description, images = [hero] } = Astro.props;
-const slides = images.length ? images : [hero];
+const { headline, description, images = [hero], video } = Astro.props;
+const available = images.length ? images : [hero];
+const slides = video ? available.slice(0, 1) : available;
 ---
 
 <vigilon-hero class="hero-slideshow">
@@ -45,7 +53,19 @@ const slides = images.length ? images : [hero];
         />
       </div>
     ))}
+    {video && (
+      <video class="hero-video" muted loop playsinline preload="none" tabindex="-1" data-hero-video>
+        <source src={video} type="video/mp4" />
+      </video>
+    )}
   </div>
+
+  {video && (
+    <button type="button" class="video-toggle" data-video-toggle data-state="paused" hidden>
+      <span class="video-toggle-icon" aria-hidden="true"></span>
+      <span data-video-label>Play animation</span>
+    </button>
+  )}
 
   {slides.length > 1 && (
     <div class="controls" hidden>
@@ -63,12 +83,76 @@ const slides = images.length ? images : [hero];
     private cleanup?: () => void;
 
     connectedCallback() {
+      const events = new AbortController();
+      const teardown: Array<() => void> = [() => events.abort()];
+      this.setupVideo(events.signal, teardown);
+      this.setupSlideshow(events.signal, teardown);
+      this.cleanup = () => teardown.forEach((dispose) => dispose());
+    }
+
+    disconnectedCallback() {
+      this.cleanup?.();
+    }
+
+    private setupVideo(signal: AbortSignal, teardown: Array<() => void>) {
+      const video = this.querySelector<HTMLVideoElement>('[data-hero-video]');
+      const toggle = this.querySelector<HTMLButtonElement>('[data-video-toggle]');
+      const label = toggle?.querySelector('[data-video-label]');
+      if (!video || !toggle || !label || !video.canPlayType('video/mp4')) return;
+
+      const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const { connection } = navigator as Navigator & { connection?: { saveData?: boolean } };
+      // `wanted` is the visitor's choice; offscreen and hidden-tab pauses don't change it.
+      let wanted = !motion.matches && !connection?.saveData;
+      let inView = true;
+      let loaded = document.readyState === 'complete';
+
+      const render = () => {
+        toggle.dataset.state = wanted ? 'playing' : 'paused';
+        label.textContent = wanted ? 'Pause animation' : 'Play animation';
+      };
+      const sync = () => {
+        const shouldPlay = wanted && inView && loaded && !document.hidden;
+        if (shouldPlay && video.paused) {
+          video.play().catch(() => {
+            // Autoplay can be blocked (for example in low-power modes); leave the image and offer Play.
+            wanted = false;
+            render();
+          });
+        } else if (!shouldPlay && !video.paused) {
+          video.pause();
+        }
+        render();
+      };
+      const fail = () => {
+        wanted = false;
+        video.pause();
+        toggle.hidden = true;
+        this.classList.remove('video-ready');
+      };
+
+      video.addEventListener('playing', () => this.classList.add('video-ready'), { signal });
+      video.addEventListener('error', fail, { signal });
+      video.querySelector('source')?.addEventListener('error', fail, { signal });
+      toggle.addEventListener('click', () => { wanted = !wanted; sync(); }, { signal });
+      document.addEventListener('visibilitychange', sync, { signal });
+      motion.addEventListener('change', () => { if (motion.matches) wanted = false; sync(); }, { signal });
+      if (!loaded) window.addEventListener('load', () => { loaded = true; sync(); }, { signal, once: true });
+
+      const observer = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; sync(); });
+      observer.observe(this);
+      teardown.push(() => { observer.disconnect(); video.pause(); });
+
+      toggle.hidden = false;
+      sync();
+    }
+
+    private setupSlideshow(signal: AbortSignal, teardown: Array<() => void>) {
       const slides = Array.from(this.querySelectorAll<HTMLElement>('[data-slide]'));
       const controls = this.querySelector<HTMLElement>('.controls');
       const toggle = this.querySelector<HTMLButtonElement>('[data-toggle]');
       if (slides.length < 2 || !controls || !toggle) return;
 
-      const events = new AbortController();
       const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
       let paused = motion.matches;
       let current = 0;
@@ -95,25 +179,16 @@ const slides = images.length ? images : [hero];
       };
 
       controls.hidden = false;
-      toggle.addEventListener('click', () => { paused = !paused; sync(); }, { signal: events.signal });
-      this.querySelector('[data-previous]')?.addEventListener('click', () => step(-1), { signal: events.signal });
-      this.querySelector('[data-next]')?.addEventListener('click', () => step(1), { signal: events.signal });
-      document.addEventListener('visibilitychange', sync, { signal: events.signal });
-      motion.addEventListener('change', () => { if (motion.matches) paused = true; sync(); }, { signal: events.signal });
+      toggle.addEventListener('click', () => { paused = !paused; sync(); }, { signal });
+      this.querySelector('[data-previous]')?.addEventListener('click', () => step(-1), { signal });
+      this.querySelector('[data-next]')?.addEventListener('click', () => step(1), { signal });
+      document.addEventListener('visibilitychange', sync, { signal });
+      motion.addEventListener('change', () => { if (motion.matches) paused = true; sync(); }, { signal });
 
       const observer = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; sync(); });
       observer.observe(this);
+      teardown.push(() => { stop(); observer.disconnect(); });
       sync();
-
-      this.cleanup = () => {
-        stop();
-        events.abort();
-        observer.disconnect();
-      };
-    }
-
-    disconnectedCallback() {
-      this.cleanup?.();
     }
   }
 
@@ -139,7 +214,9 @@ const slides = images.length ? images : [hero];
   }
   .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 900ms ease; }
   .slide.active { opacity: 1; }
-  .slide :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 85% 50%; }
+  .slide :global(img), .hero-video { width: 100%; height: 100%; object-fit: cover; object-position: 85% 50%; }
+  .hero-video { position: absolute; inset: 0; opacity: 0; transition: opacity 600ms ease; }
+  vigilon-hero.video-ready .hero-video { opacity: 1; }
 
   .copy {
     max-width: var(--max-width);
@@ -164,6 +241,44 @@ const slides = images.length ? images : [hero];
   }
   .actions { display: flex; flex-wrap: wrap; gap: 0.875rem; }
 
+  .video-toggle {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.25rem;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.5rem 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+    background: rgba(7, 12, 22, 0.72);
+    color: var(--color-white);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+  .video-toggle:hover { background: rgba(7, 12, 22, 0.92); border-color: var(--color-white); }
+  .video-toggle[hidden] { display: none; }
+  .video-toggle:focus-visible { outline: 3px solid var(--color-electric-cyan); outline-offset: 3px; }
+  .video-toggle-icon { display: inline-block; box-sizing: border-box; }
+  .video-toggle[data-state='playing'] .video-toggle-icon {
+    width: 10px;
+    height: 12px;
+    border-left: 3px solid currentColor;
+    border-right: 3px solid currentColor;
+  }
+  .video-toggle[data-state='paused'] .video-toggle-icon {
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 10px solid currentColor;
+  }
+
   .controls { position: absolute; right: 1.5rem; bottom: 1.25rem; display: flex; gap: 0.5rem; }
   .controls[hidden] { display: none; }
   .controls button {
@@ -184,11 +299,12 @@ const slides = images.length ? images : [hero];
     h1, .description { max-width: none; }
     .media { position: relative; inset: auto; z-index: 0; width: 100%; aspect-ratio: 16 / 10; }
     .media::after { background: linear-gradient(180deg, var(--color-midnight-blue) 0%, rgba(11, 31, 63, 0) 28%); }
-    .slide :global(img) { object-position: 80% 50%; }
+    .slide :global(img), .hero-video { object-position: 80% 50%; }
+    .video-toggle { right: 1rem; bottom: 1rem; }
     .controls { position: static; flex-wrap: wrap; justify-content: center; padding: 1rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .slide { transition: none; }
+    .slide, .hero-video { transition: none; }
   }
 </style>

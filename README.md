@@ -41,7 +41,11 @@ All commands are run from the root of the project, from a terminal:
 
 ## 🖼️ Hero media
 
-`src/components/HeroSlideshow.astro` renders the static artwork in `src/assets/vigilon-hero.png` through Astro’s image optimisation. Passing more approved images enables a crossfade with previous, next and pause controls (paused under reduced motion, offscreen and in hidden tabs). There is no video support yet.
+`src/components/HeroSlideshow.astro` renders the static artwork in `src/assets/vigilon-hero.png` through Astro’s image optimisation. It is the first paint and the fallback whenever video doesn’t play.
+
+The homepage passes `video="/images/vigilon-hero-loop.mp4"` (H.264, no audio, 1920×800, framed like the PNG). The muted loop fades in over the image after page load, has a visible Pause/Play button, pauses offscreen and in hidden tabs, and doesn’t autoplay under `prefers-reduced-motion` or Save-Data. Keep replacement videos silent, loopable, “fast start” (moov atom first) and dark on the left where the text sits.
+
+Without `video`, passing more approved images enables a crossfade with previous, next and pause controls.
 
 ## 📝 Content waiting for owner input
 

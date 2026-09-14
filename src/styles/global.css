@@ -136,6 +136,9 @@ p + p { margin-top: 1rem; }
 .section-dark .btn-outline:hover,
 .page-header .btn-outline:hover,
 .btn-ghost:hover { border-color: var(--color-white); background: rgba(255, 255, 255, 0.12); color: var(--color-white); }
+/* Ghost buttons sit on artwork and video: a dark fill keeps white text readable on bright frames. */
+.btn-ghost { background: rgba(7, 12, 22, 0.7); }
+.btn-ghost:hover { background: rgba(7, 12, 22, 0.9); }
 .btn-white { background: var(--color-white); color: var(--color-primary); }
 .btn-white:hover { background: var(--color-surface); color: var(--color-primary); }
 .btn-lg { padding: 1rem 2.25rem; font-size: 1.125rem; }
