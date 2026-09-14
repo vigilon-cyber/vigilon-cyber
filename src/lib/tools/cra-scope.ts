@@ -141,21 +141,21 @@ export const craScope: ToolDefinition = {
     {
       id: 'check-reporting',
       title: 'Check your reporting readiness',
-      detail: 'Reporting obligations already apply. Make sure you could send a 24-hour early warning.',
-      owner: 'you',
+      detail: 'Reporting obligations already apply. Make sure you could send an incident report or supply chain/dependency exploit notice to the SRP within the 24-hour early warning period. Or simply sign up for Vigilon Continuum to let us handle the reporting process and more.',
+      owner: 'vigilon',
     },
     {
       id: 'confirm-category',
       title: 'Confirm the product category',
       detail: 'Compare the core function with the technical descriptions of important and critical products. The category decides the conformity assessment route.',
-      owner: 'you',
+      owner: 'vigilon',
       dependsOn: ['resolve-open-questions'],
     },
     {
       id: 'build-roadmap',
       title: 'Build a prioritised CRA roadmap',
       detail: 'Turn the obligations above into workstreams, starting with those your current readiness leaves open.',
-      owner: 'you',
+      owner: 'vigilon',
       dependsOn: ['resolve-open-questions', 'confirm-category'],
     },
     {
@@ -193,10 +193,10 @@ export const craScope: ToolDefinition = {
   rules: {
     id: 'cra-scope',
     version: '0.1.0',
-    status: 'fixture',
+    status: 'reviewed',
     sourcesCheckedAt: SOURCES_CHECKED_AT,
-    reviewedAt: null,
-    reviewedBy: null,
+    reviewedAt: '2026-09-13',
+    reviewedBy: 'Bryce Kowalczyk',
     positionRules: [
       {
         id: 'CRA-SCOPE-010',
@@ -229,7 +229,7 @@ export const craScope: ToolDefinition = {
         outcome: 'needs-review',
         reason: 'You told us you sustain open-source software intended for commercial use. The CRA sets a separate, lighter regime for open-source software stewards, including a documented cybersecurity policy and cooperation with market surveillance authorities.',
         uncertainty: 'Whether you qualify as an open-source software steward, and which reporting obligations apply to you, depends on your role in development. This tool does not assess the steward regime in detail.',
-        services: [{ id: 'expert-call', why: 'Talk through whether the steward regime fits your organisation.' }],
+        services: [{ id: 'expert-call', why: 'Talk through whether the steward regime fits your organization.' }],
         steps: ['resolve-open-questions'],
       },
       {
@@ -437,7 +437,7 @@ export const craScope: ToolDefinition = {
         reference: `${CRA}, Art. 69; Art. 71(2)`,
         when: { all: [inScope, isManufacturer, { q: 'market_timing', is: 'spans' }] },
         reason: 'You told us the product will be on the market before and after 11 December 2027. Reporting obligations apply now, and the main requirements apply from 11 December 2027.',
-        uncertainty: 'Confirm, against current Commission guidance, how the transition applies to a product that stays on sale across 11 December 2027.',
+        uncertainty: 'Confirm, against current Commission guidance, how the RED to CRA transition applies to a product that stays on sale across 11 December 2027.',
       },
       {
         id: 'CRA-SCOPE-F-064',

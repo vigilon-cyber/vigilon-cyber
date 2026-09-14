@@ -66,13 +66,13 @@ export const craRoadmap: ToolDefinition = {
       id: 'confirm-scope',
       title: 'Confirm CRA scope, your role and the product category',
       detail: 'Scope, role and category decide which obligations and conformity assessment route apply.',
-      owner: 'you',
+      owner: 'vigilon',
     },
     {
       id: 'reporting-readiness',
       title: 'Make sure you can meet reporting deadlines now',
-      detail: 'Set up a monitored intake route, a way to recognise actively exploited vulnerabilities and severe incidents, and a decision-maker who can send a 24-hour early warning.',
-      owner: 'you',
+      detail: `Sign up for Vigilon Continuum to meet compliance immediately.  Otherwise: Set up a monitored intake route, a way to recognise actively exploited vulnerabilities and severe incidents in the product and relevant dependencies, and designate a company representative for handling and submitting reports within the 24-hour deadline.`,
+      owner: 'vigilon',
     },
     {
       id: 'vulnerability-process',
@@ -91,8 +91,8 @@ export const craRoadmap: ToolDefinition = {
     {
       id: 'sbom',
       title: 'Generate and maintain an SBOM',
-      detail: 'Produce a machine-readable software bill of materials covering at least top-level dependencies, and keep it current with each release.',
-      owner: 'you',
+      detail: 'Included with Vigilon Continuum.   Otherwise: produce a machine-readable software bill of materials (SBOM) covering at least top-level dependencies, and keep it current with each release.',
+      owner: 'vigilon',
     },
     {
       id: 'support-period-updates',
@@ -104,7 +104,7 @@ export const craRoadmap: ToolDefinition = {
     {
       id: 'testing',
       title: 'Test the product against the applicable requirements',
-      detail: 'Run tests based on the risk assessment and record the results as evidence.',
+      detail: 'Run a conformity assessment and tests based on the Annex I Part I essential requirements and the risk assessment and generate a report of results as evidence.',
       owner: 'vigilon',
       dependsOn: ['risk-assessment'],
     },
@@ -117,16 +117,16 @@ export const craRoadmap: ToolDefinition = {
     },
     {
       id: 'conformity-route',
-      title: 'Complete the conformity assessment',
-      detail: 'Follow the procedure for the product category, then draw up the EU declaration of conformity and affix the CE marking.',
+      title: 'Complete the declaration of conformity',
+      detail: 'Following procedure for the product category, draw up the EU declaration of conformity and affix the CE marking.',
       owner: 'you',
       dependsOn: ['confirm-scope', 'technical-documentation'],
     },
     {
       id: 'ongoing',
       title: 'Keep vulnerability handling, updates and reporting running',
-      detail: 'These obligations continue for the support period, and documentation must be kept for at least 10 years or the support period, whichever is longer.',
-      owner: 'ongoing',
+      detail: 'These obligations continue for the support period and are all handled by the Continuum platform. If electing to use an alternative method, you must still maintain evidence of compliance, including vulnerability handling records, update logs, and documentation for at least 10 years or the support period, whichever is longer.',
+      owner: 'vigilon',
     },
   ],
   actions: {
@@ -137,10 +137,10 @@ export const craRoadmap: ToolDefinition = {
   rules: {
     id: 'cra-roadmap',
     version: '0.1.0',
-    status: 'fixture',
+    status: 'reviewed',
     sourcesCheckedAt: SOURCES_CHECKED_AT,
-    reviewedAt: null,
-    reviewedBy: null,
+    reviewedAt: '2024-09-14',
+    reviewedBy: 'Bryce Kowalczyk',
     positionRules: [
       {
         id: 'CRA-ROADMAP-010',
@@ -291,7 +291,7 @@ export const craRoadmap: ToolDefinition = {
         when: { all: [plan, { q: 'test_evidence', is: ['informal', 'none', 'unsure'] }] },
         services: [
           { id: 'cra-gap-analysis', why: 'Measures the product against the essential requirements.' },
-          { id: 'penetration-testing', why: 'Hands-on testing that can feed the test reports in your documentation.' },
+          { id: 'conformity-assessment', why: 'Hands-on testing that can feed the test reports in your documentation.' },
         ],
         steps: ['testing'],
       },
@@ -361,7 +361,7 @@ export const craRoadmap: ToolDefinition = {
         reference: `${CRA}, Art. 69; Art. 71(2)`,
         when: { all: [plan, { q: 'market_timing', is: 'spans' }] },
         reason: 'You told us supply will continue after 11 December 2027. Reporting applies now, and the main requirements apply from 11 December 2027.',
-        uncertainty: 'Confirm, against current Commission guidance, how the transition applies to a product that stays on sale across 11 December 2027.',
+        uncertainty: 'Confirm, against current Commission guidance, how the RED to CRA transition applies to a product that stays on sale across 11 December 2027.',
       },
       {
         id: 'CRA-ROADMAP-F-094',

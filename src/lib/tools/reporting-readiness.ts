@@ -156,10 +156,10 @@ export const reportingReadiness: ToolDefinition = {
   rules: {
     id: 'reporting-readiness',
     version: '0.1.0',
-    status: 'fixture',
+    status: 'reviewed',
     sourcesCheckedAt: SOURCES_CHECKED_AT,
-    reviewedAt: null,
-    reviewedBy: null,
+    reviewedAt: '2026-09-14',
+    reviewedBy: 'Bryce Kowalczyk',
     positionRules: [
       {
         id: 'CRA-REPORTING-010',
@@ -223,8 +223,8 @@ export const reportingReadiness: ToolDefinition = {
         sources: ['cra'],
         reference: `${CRA}, Art. 13(17); Annex I, Part II(5)–(6)`,
         when: { all: [plan, { q: 'intake', is: ['general', 'none', 'unsure'] }] },
-        reason: 'You told us outside reporters have {{intake}}. Manufacturers need a coordinated vulnerability disclosure policy, a contact address for vulnerability reports and a single point of contact for users.',
-        services: [{ id: 'vulnerability-handling', why: 'Designs the disclosure policy and intake process.' }],
+        reason: 'You told us outside reporters have {{intake}}. Manufacturers need a coordinated vulnerability disclosure (CVD) policy, a contact address for vulnerability reports and a single point of contact for users.',
+        services: [{ id: 'continuum', why: 'Designs a CVD policy and intake process.' }],
         steps: ['intake'],
       },
       {
@@ -241,8 +241,8 @@ export const reportingReadiness: ToolDefinition = {
         sources: ['cra'],
         reference: `${CRA}, Art. 3(42); Art. 14(1), (3), (5)`,
         when: { all: [plan, { q: 'triage', is: ['ad_hoc', 'none', 'unsure'] }] },
-        reason: 'Deadlines run from when you become aware of an actively exploited vulnerability or severe incident, so you need a consistent way to recognise one.',
-        services: [{ id: 'vulnerability-handling', why: 'Defines assessment criteria, owners and escalation paths.' }],
+        reason: 'Deadlines run from when you become aware of an actively exploited vulnerability or severe incident, so you need a consistent way to recognize one.',
+        services: [{ id: 'continuum', why: 'Recognizes direct and downstream exploits and severe incidents with defined criteria for when reporting is required, and manages the associated workflows.' }],
         steps: ['triage'],
       },
       {
@@ -278,10 +278,9 @@ export const reportingReadiness: ToolDefinition = {
         when: { all: [plan, { q: 'notification_prep', is: ['partial', 'none', 'unsure'] }] },
         reason: 'Each notification stage has required content — for example general information about the product, the nature of the exploit or incident, and corrective or mitigating measures — and the route depends on your main EU establishment.',
         services: [
-          { id: 'vulnerability-handling', why: 'Prepares notification templates, routing and approvals.' },
           {
             id: 'continuum',
-            why: 'Vigilon’s SaaS reporting platform. Notifications themselves are submitted through the EU Single Reporting Platform; ask which Continuum capabilities fit how you prepare and track them.',
+            why: 'Generates/reconciles SBOMs, runs vulnerability assessments, prepares notification reports, and manages routing and approvals. SBOMs are continuously monitored against exploit databases through the support period and reports are automatically generated for directly reported incidents and exploits, or relevant dependency CVEs. Notifications are submitted through the EU Single Reporting Platform after client approval with escalation exceptions to meet the 24-hour deadline.',
           },
         ],
         steps: ['notification'],
@@ -320,7 +319,7 @@ export const reportingReadiness: ToolDefinition = {
         services: [
           {
             id: 'continuum',
-            why: 'Vigilon’s SaaS reporting platform — ask which capabilities fit how you keep reporting records.',
+            why: 'Continuum maintains incident and exploit reports to ensure records are complete and accurate. As a centralized platform for tracking decisions, notifications, and follow-up actions related to incidents, final corrective action reports can be generated and submitted automatically once all necessary information is available.',
           },
         ],
         steps: ['records'],

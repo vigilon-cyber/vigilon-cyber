@@ -18,6 +18,7 @@ export type ServiceId =
   | 'cra-conformity-prep'
   | 'risk-assessment'
   | 'penetration-testing'
+  | 'conformity-assessment'
   | 'continuum'
   | 'expert-call';
 
@@ -91,7 +92,7 @@ export const SERVICES: Record<ServiceId, Service> = {
   'cra-conformity-prep': {
     id: 'cra-conformity-prep',
     name: 'Conformity assessment preparation',
-    href: '/services/cyber-resilience-act#conformity-assessment',
+    href: '/services/cyber-resilience-act#conformity-assessment-preparation',
     kind: 'assisted',
     description: 'Preparing for the conformity assessment route that applies to the product, including Notified Body examination where required.',
   },
@@ -101,6 +102,13 @@ export const SERVICES: Record<ServiceId, Service> = {
     href: '/services/risk-assessment',
     kind: 'assisted',
     description: 'Structured, documented cybersecurity risk assessment and threat modelling for the product.',
+  },
+  'conformity-assessment': {
+    id: 'conformity-assessment',
+    name: 'Conformity assessment',
+    href: '/services/cyber-resilience-act#conformity-assessment',
+    kind: 'assisted',
+    description: 'Hands-on testing that can feed the test reports in your documentation.',
   },
   'penetration-testing': {
     id: 'penetration-testing',

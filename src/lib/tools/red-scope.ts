@@ -73,8 +73,8 @@ export const redScope: ToolDefinition = {
   positions: {
     'in-scope': {
       label: 'Likely in scope',
-      headline: 'The RED cybersecurity requirements are likely to apply',
-      summary: 'Based on your answers, at least one of the requirements in Article 3(3)(d), (e) or (f) appears to apply. This is preliminary guidance, not a legal determination.',
+      headline: 'The RED cybersecurity requirements very likely apply',
+      summary: 'Based on your answers, at least one of the requirements in Article 3.3(d), (e) or (f) appears to apply. See specifics, reasoning, and next steps below. This is preliminary guidance, not a legal determination.',
     },
     'outside-checked-scope': {
       label: 'Likely outside the checked scope',
@@ -124,7 +124,7 @@ export const redScope: ToolDefinition = {
       id: 'confirm-requirements',
       title: 'Confirm which EN 18031 parts and restrictions apply',
       detail: 'Map each applicable requirement to EN 18031-1, -2 or -3, including the restrictions published with their citation.',
-      owner: 'you',
+      owner: 'vigilon',
       dependsOn: ['resolve-open-questions'],
     },
     {
@@ -195,10 +195,10 @@ export const redScope: ToolDefinition = {
   rules: {
     id: 'red-scope',
     version: '0.1.0',
-    status: 'fixture',
+    status: 'reviewed',
     sourcesCheckedAt: SOURCES_CHECKED_AT,
-    reviewedAt: null,
-    reviewedBy: null,
+    reviewedAt: '2026-09-13',
+    reviewedBy: 'Bryce Kowalczyk',
     positionRules: [
       {
         id: 'RED-SCOPE-010',
@@ -231,7 +231,7 @@ export const redScope: ToolDefinition = {
         reference: `${DA}, Art. 2(1)`,
         when: { q: 'sector_rules', includes: 'medical' },
         outcome: 'outside-checked-scope',
-        reason: 'You told us the product is a medical device or in vitro diagnostic medical device. The RED cybersecurity requirements in Article 3(3)(d), (e) and (f) don’t apply to radio equipment also covered by those regulations.',
+        reason: 'You told us the product is a medical device or in vitro diagnostic medical device. The RED cybersecurity requirements in Article 3(3)(d), (e) and (f) are superseded for radio equipment also covered by those regulations.',
         uncertainty: 'Confirm that Regulation (EU) 2017/745 or (EU) 2017/746 actually applies to the product.',
         steps: ['confirm-other-legislation', 'other-red-requirements'],
       },
