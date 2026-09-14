@@ -7,9 +7,10 @@ export interface Props {
   description: string;
   canonical?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
-const { title, description, canonical, ogImage = '/images/og-default.jpg' } = Astro.props;
+const { title, description, canonical, ogImage = '/images/og-default.jpg', noindex = false } = Astro.props;
 const siteUrl = 'https://www.vigiloncyber.com';
 const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
 ---
@@ -22,6 +23,7 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalUrl} />
+  {noindex && <meta name="robots" content="noindex" />}
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -96,7 +98,7 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
       "Vulnerability Scanning"
     ]
   })} />
-  
+
   <!-- Vercel Speed Insights -->
   <script>
     import { injectSpeedInsights } from '@vercel/speed-insights';
@@ -104,30 +106,22 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <slot name="header" />
-  <main>
+  <main id="main" tabindex="-1">
     <slot />
   </main>
   <slot name="footer" />
-
-  <!-- Mobile nav toggle -->
-  <script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.querySelector('.mobile-toggle');
-      const nav = document.querySelector('.nav-links');
-      if (toggle && nav) {
-        toggle.addEventListener('click', () => nav.classList.toggle('open'));
-      }
-    });
-  </script>
 
   <!-- FAQ accordion -->
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
         btn.addEventListener('click', () => {
           const item = btn.closest('.faq-item');
-          item.classList.toggle('open');
+          const open = item.classList.toggle('open');
+          btn.setAttribute('aria-expanded', String(open));
         });
       });
     });

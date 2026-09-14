@@ -1,0 +1,55 @@
+---
+/** Compact header for guided tool pages: brand, tool name, help and a visible exit. */
+interface Props {
+  toolName: string;
+}
+
+const { toolName } = Astro.props;
+---
+
+<header class="site-header tool-header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/favicon.svg" alt="" width="28" height="28" />
+      Vigilon <span>Cyber</span>
+    </a>
+    <p class="tool-header-name">{toolName}</p>
+    <nav class="tool-header-actions" aria-label="Tool">
+      <a href="#tool-help">Help</a>
+      <a href="/#guided-starts" class="tool-exit">Exit<span class="sr-only"> the {toolName} check</span></a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .tool-header-name {
+    flex: 1;
+    color: var(--color-text-on-dark);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tool-header-actions { display: flex; gap: 0.25rem; }
+  .tool-header-actions a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.5rem 0.875rem;
+    border-radius: var(--radius);
+    color: var(--color-white);
+    font-weight: 600;
+  }
+  .tool-header-actions a:hover { background: rgba(0, 212, 255, 0.12); }
+  .tool-exit { border: 1px solid rgba(255, 255, 255, 0.6); }
+
+  @media (max-width: 640px) {
+    .tool-header-name { display: none; }
+  }
+
+  @media (max-width: 380px) {
+    .header-inner { padding: 0 1rem; gap: 0.5rem; }
+    .logo { font-size: 1.15rem; }
+    .tool-header-actions a { padding: 0.5rem 0.625rem; }
+  }
+</style>

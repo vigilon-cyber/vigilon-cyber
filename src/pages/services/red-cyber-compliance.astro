@@ -2,75 +2,91 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { toolLinkOr } from '../../lib/tools/registry.ts';
 
-const title = 'RED DA Article 3.3 d/e/f Compliance Testing for CE Marking | Vigilon Cyber';
-const description = 'Expert EN 18031 compliance testing for CE marking under the Radio Equipment Directive Delegated Act (RED DA 2022/30/EU). We support self-declaration and Notified Body assessment pathways for connected products.';
+const title = 'RED Cybersecurity Testing (EN 18031) | Vigilon Cyber';
+const description = 'Testing against the Radio Equipment Directive (RED) cybersecurity requirements in Article 3(3)(d), (e) and (f) using EN 18031, with support for self-declaration and Notified Body preparation.';
+
+const env = { dev: import.meta.env.DEV, previewFlag: import.meta.env.PUBLIC_GUIDED_TOOLS_PREVIEW };
+const scopeLink = toolLinkOr('red-scope', '/request-quote', env);
 ---
 
 <BaseLayout title={title} description={description}>
-  <Header />
+  <Header slot="header" />
 
   <section class="page-header">
     <div class="container">
       <div class="breadcrumb">
-        <a href="/">Home</a><span>/</span><a href="/services">Services</a><span>/</span><strong>RED CE Cyber Compliance</strong>
+        <a href="/">Home</a><span>/</span><a href="/services">Services</a><span>/</span><strong>RED Cybersecurity Testing</strong>
       </div>
-      <h1>RED DA Cyber Compliance Testing for CE Marking</h1>
-      <p>Achieve CE marking for your connected products with expert compliance testing against the harmonised cybersecurity standard EN&nbsp;18031 under the Radio Equipment Directive Delegated Act (RED DA 2022/30/EU).</p>
+      <h1>RED Cybersecurity Testing</h1>
+      <p>Test radio products against the cybersecurity requirements of the EU Radio Equipment Directive (RED) using the EN&nbsp;18031 harmonised standards, and build the evidence your technical documentation needs.</p>
+      <div class="header-actions">
+        <a href={scopeLink} class="btn btn-primary">Scope my RED testing</a>
+        <a href="/request-quote" class="btn btn-outline">Request a quote</a>
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container prose">
-      <h2>What Is EN 18031?</h2>
-      <p>EN 18031 is the harmonised European standard that provides the cybersecurity requirements and evaluation methodology for radio equipment under the <strong>Radio Equipment Directive Delegated Act (RED DA 2022/30/EU)</strong>. It addresses the essential requirements of Article 3.3(d), (e) and (f) relating to network protection, privacy, and fraud prevention.</p>
-      <p>Since August 2025, manufacturers placing internet-connected radio equipment on the EU market must demonstrate conformity with these cybersecurity provisions. EN&nbsp;18031 provides a presumption of conformity, making it the most efficient path to CE marking for cybersecurity.</p>
-
-      <h2>Self-Declaration vs. Notified Body Assessment</h2>
-      <p>Manufacturers have two routes to demonstrate conformity:</p>
-      <h3>Self-Declaration (Module A)</h3>
+      <h2>Which products are affected?</h2>
+      <p>Delegated Regulation (EU) 2022/30 makes three RED cybersecurity requirements apply from 1&nbsp;August&nbsp;2025 to certain categories of radio equipment:</p>
       <ul>
-        <li>The manufacturer performs or commissions the conformity assessment themselves</li>
-        <li>Issues an EU Declaration of Conformity and affixes the CE mark</li>
-        <li>Suitable when harmonised standards cover all applicable essential requirements</li>
-        <li>Requires robust technical documentation and test evidence</li>
+        <li><strong>Article 3(3)(d), network protection:</strong> radio equipment that can communicate over the internet, directly or through other equipment.</li>
+        <li><strong>Article 3(3)(e), personal data and privacy:</strong> internet-connected radio equipment, childcare radio equipment, toys and wearables that can process personal, traffic or location data.</li>
+        <li><strong>Article 3(3)(f), protection from fraud:</strong> internet-connected radio equipment that lets users transfer money, monetary value or virtual currency.</li>
       </ul>
-      <h3>Notified Body Assessment (Module B+C)</h3>
+      <p>There are exclusions. For example, the requirements don’t apply to radio equipment also covered by the EU medical device regulations, and (e) and (f) don’t apply to equipment covered by certain vehicle, civil aviation and road toll rules.</p>
+      <p>These are cybersecurity requirements only. Radio products still need to meet the RED’s other requirements, such as safety, electromagnetic compatibility and radio spectrum use.</p>
+
+      <div class="notice">
+        <h3>Changes from 11 December 2027</h3>
+        <p>Delegated Regulation (EU) 2026/339 repeals these RED cybersecurity requirements from 11&nbsp;December&nbsp;2027, when the Cyber Resilience Act (CRA) applies in full. From that date, the CRA’s cybersecurity requirements apply to products within its scope. Compliance of radio equipment placed on the market between 1&nbsp;August&nbsp;2025 and 10&nbsp;December&nbsp;2027 can still be checked under the RED. <a href="/services/cyber-resilience-act">About CRA readiness</a>.</p>
+      </div>
+
+      <h2>EN 18031 and presumption of conformity</h2>
+      <p>EN&nbsp;18031-1, -2 and -3 are the harmonised standards for Article 3(3)(d), (e) and (f). Their references were published in the Official Journal in January&nbsp;2025 with restrictions. For example, they don’t give a presumption of conformity where users can choose not to set or use any password, and the secure-update assessment criteria in EN&nbsp;18031-3 don’t give a presumption of conformity for Article 3(3)(f).</p>
+
+      <h2>Self-declaration or Notified Body?</h2>
+      <p>Where the harmonised standards are applied in full, manufacturers can use internal production control (module&nbsp;A) and self-declare conformity. Where they aren’t applied, are applied only in part, or don’t exist, a Notified Body procedure — EU-type examination followed by conformity to type (modules&nbsp;B and&nbsp;C), or full quality assurance (module&nbsp;H) — is required for the requirements concerned.</p>
+
+      <h2>Our RED testing services</h2>
+      <h3 id="gap-analysis">Gap analysis</h3>
+      <p>We review your product design, architecture and existing security measures against EN&nbsp;18031. You receive a gap report identifying non-conformities, with remediation guidance ranked by priority.</p>
+      <h3 id="compliance-testing">Compliance testing</h3>
+      <p>We perform the evaluation methodology specified in EN&nbsp;18031, including functional testing, security mechanism verification, documentation review and evidence gathering for your technical file.</p>
+      <h3 id="technical-file">Technical file preparation</h3>
+      <p>We help you compile the technical documentation required under the RED, including the cybersecurity risk assessment, test reports and evidence of conformity, which must be kept for 10 years after the product is placed on the market.</p>
+      <h3 id="notified-body-preparation">Notified Body preparation</h3>
+      <p>If you need a Notified Body assessment, we prepare you for it — pre-testing your product, reviewing your documentation and addressing potential non-conformities before the formal assessment.</p>
+
+      <h2>Engagement options</h2>
+      <p>See how RED testing engagements are typically structured on our <a href="/packages">packages page</a>, or <a href="/request-quote">request a quote</a> for your product.</p>
+
+      <h2>Related</h2>
       <ul>
-        <li>Required when harmonised standards do not fully cover essential requirements, or for higher-risk product categories</li>
-        <li>A Notified Body conducts an EU-type examination (Module B)</li>
-        <li>The manufacturer ensures ongoing conformity of production (Module C)</li>
-        <li>Provides the highest level of assurance to market surveillance authorities</li>
+        <li><a href="/services/cyber-resilience-act">CRA readiness &amp; technical documentation</a></li>
+        <li><a href="/services/risk-assessment">Risk assessment &amp; threat modelling</a></li>
+        <li><a href="/services/penetration-testing">Penetration testing</a></li>
+        <li><a href="/blog/en-18031-complete-guide">The Complete Guide to EN 18031-1 Compliance</a></li>
       </ul>
 
-      <h2>Our EN 18031 Services</h2>
-      <h3>Gap Analysis</h3>
-      <p>We review your product design, architecture, and existing security measures against every clause of EN&nbsp;18031. You receive a detailed gap report identifying non-conformities and remediation guidance ranked by priority.</p>
-      <h3>Compliance Testing</h3>
-      <p>We perform the full evaluation methodology specified in EN&nbsp;18031, including functional testing, security mechanism verification, documentation review, and evidence gathering for your technical file.</p>
-      <h3>Technical File Preparation</h3>
-      <p>We help you compile the technical documentation required under the RED, including the cybersecurity risk assessment, test reports, and evidence of conformity that must be kept for 10 years.</p>
-      <h3>Notified Body Preparation</h3>
-      <p>If you require a Notified Body assessment, we prepare you for the examination process — pre-testing your product, reviewing your documentation, and addressing potential non-conformities before the formal assessment.</p>
-
-      <h2>Why Choose Vigilon Cyber for EN 18031?</h2>
-      <ul>
-        <li>Deep regulatory expertise in RED and EN&nbsp;18031 series</li>
-        <li>Experience with both self-declaration and Notified Body pathways</li>
-        <li>Clear, actionable reporting with remediation priorities</li>
-        <li>Ongoing support through to successful CE marking</li>
-        <li>Integrated <a href="/services/penetration-testing">penetration testing</a> and <a href="/services/risk-assessment">risk assessment</a> capabilities</li>
-      </ul>
-
-      <blockquote>
-        "EN 18031-1 compliance is not optional — it's the gateway to the European market for connected products. The earlier you start, the smoother the path to CE marking."
-      </blockquote>
+      <p class="sources">Sources: Directive 2014/53/EU, Articles 3, 10 and 17; Delegated Regulation (EU) 2022/30, as amended; Implementing Decision (EU) 2025/138; Delegated Regulation (EU) 2026/339. Checked 13&nbsp;September&nbsp;2026.</p>
 
       <div class="text-center mt-2">
-        <a href="/request-quote" class="btn btn-primary btn-lg">Get a Quote for EN 18031 Testing</a>
+        <a href={scopeLink} class="btn btn-primary btn-lg">Scope my RED testing</a>
       </div>
     </div>
   </section>
 
-  <Footer />
+  <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  .header-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+  .notice { margin: 2rem 0; padding: 1.25rem 1.5rem; border-left: 4px solid var(--color-intelligent-blue); border-radius: 0 var(--radius) var(--radius) 0; background: var(--color-surface); }
+  .notice h3 { margin-top: 0; }
+  .notice p { margin-bottom: 0; }
+  .sources { margin-top: 2rem; font-size: 0.9rem; color: var(--color-text-light); }
+</style>

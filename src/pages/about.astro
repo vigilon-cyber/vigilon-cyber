@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import DevNote from '../components/DevNote.astro';
+
+const title = 'About Vigilon Cyber | Product Cybersecurity Compliance';
+const description = 'Vigilon Cyber specialises in cybersecurity compliance for connected products: RED testing, CRA readiness and technical documentation, security assessments and Vigilon Continuum.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Header slot="header" />
+
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Home</a><span>/</span><strong>About</strong>
+      </div>
+      <h1>About Vigilon Cyber</h1>
+      <p>Specialists in cybersecurity compliance for connected products.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2>What we do</h2>
+      <p>Vigilon Cyber helps manufacturers bring connected products to market with the cybersecurity evidence EU rules require: <a href="/services/red-cyber-compliance">RED cybersecurity testing</a>, <a href="/services/cyber-resilience-act">CRA readiness and technical documentation</a>, <a href="/services#other-assessments">broader security assessments</a>, and <a href="/continuum">Vigilon Continuum</a>, our SaaS reporting platform.</p>
+
+      <h2>How we work</h2>
+      <ul>
+        <li><strong>Regulatory focus.</strong> We work with the Radio Equipment Directive, EN&nbsp;18031, the Cyber Resilience Act, ETSI EN&nbsp;303&nbsp;645 and TS&nbsp;103&nbsp;701, and NIST SP&nbsp;800 guidance.</li>
+        <li><strong>Both assessment routes.</strong> We support self-declaration and preparation for Notified Body assessment.</li>
+        <li><strong>Actionable reporting.</strong> Findings come with remediation guidance prioritised by risk.</li>
+      </ul>
+
+      <DevNote inputs={['INPUT-04', 'INPUT-05']}>
+        <p>Add named experts and their backgrounds, verified credentials (keeping personal certifications, memberships, partner accreditations and Vigilon’s own accreditation distinct), and current partnership details. Confirm the phone number and response commitments before adding them here.</p>
+      </DevNote>
+
+      <h2>Company</h2>
+      <p>Vigilon Cyber is a trading name of XtraByte Consulting, LLC, based in Burlington, Vermont.</p>
+
+      <h2>Contact</h2>
+      <ul>
+        <li>Inquiries: <a href="mailto:info@vigiloncyber.com">info@vigiloncyber.com</a></li>
+        <li>Compliance guidance: <a href="mailto:compliance@vigiloncyber.com">compliance@vigiloncyber.com</a></li>
+        <li>Phone: <a href="tel:+18023495325">+1 (802) 349-5325</a></li>
+      </ul>
+
+      <div class="text-center mt-2">
+        <a href="/request-quote" class="btn btn-primary btn-lg">Talk to an expert</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

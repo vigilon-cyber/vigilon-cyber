@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { resolveToolCards } from '../lib/tools/registry.ts';
+
+const title = 'Resources — Compliance Checks, Guides & FAQ | Vigilon Cyber';
+const description = 'Guided checks for RED and CRA scope, CRA roadmap planning and reporting readiness, plus guides and answers to common questions.';
+
+const cards = resolveToolCards({ dev: import.meta.env.DEV, previewFlag: import.meta.env.PUBLIC_GUIDED_TOOLS_PREVIEW });
+
+const guides = [
+  { title: 'Radio Equipment Directive: Cybersecurity Requirements Explained', href: '/blog/red-compliance-2026', published: 'March 2026' },
+  { title: 'Cyber Resilience Act: What Manufacturers Need to Know', href: '/blog/cyber-resilience-act-overview', published: 'February 2026' },
+  { title: 'The Complete Guide to EN 18031-1 Compliance', href: '/blog/en-18031-complete-guide', published: 'April 2026' },
+  { title: 'Self-Declaration vs. Notified Body: Choosing Your Compliance Path', href: '/blog/self-declaration-vs-notified-body', published: 'December 2025' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <Header slot="header" />
+
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Home</a><span>/</span><strong>Resources</strong>
+      </div>
+      <h1>Resources</h1>
+      <p>Guided checks, guides and answers to common questions about RED and CRA cybersecurity requirements.</p>
+    </div>
+  </section>
+
+  <section id="tools" class="section" aria-labelledby="tools-title">
+    <div class="container">
+      <h2 id="tools-title" class="resources-heading">Guided compliance checks</h2>
+      <p class="resources-intro">Each check asks a few questions about one product and shows the result straight away. Your answers stay in your browser tab unless you choose to send them.</p>
+      <ul class="tool-list">
+        {cards.map((card) => (
+          <li>
+            <h3><a href={card.href}>{card.label}</a></h3>
+            <p>{card.title} {card.description}</p>
+            {card.preview && <span class="preview-tag">Preview · rules not yet reviewed</span>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="guides" class="section section-alt" aria-labelledby="guides-title">
+    <div class="container">
+      <h2 id="guides-title" class="resources-heading">Guides</h2>
+      <ul class="guide-list">
+        {guides.map((guide) => (
+          <li>
+            <a href={guide.href}>{guide.title}</a>
+            <span>Published {guide.published}</span>
+          </li>
+        ))}
+      </ul>
+      <p><a href="/blog" class="btn btn-outline">Browse all guides</a></p>
+    </div>
+  </section>
+
+  <section id="faq" class="section" aria-labelledby="faq-title">
+    <div class="container">
+      <h2 id="faq-title" class="resources-heading">Frequently asked questions</h2>
+      <p class="resources-intro">Answers about RED, the CRA, ETSI IoT security and working with Vigilon.</p>
+      <p><a href="/faq" class="btn btn-outline">Read the FAQ</a></p>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .resources-heading { font-size: 1.75rem; color: var(--color-midnight-blue); margin-bottom: 0.5rem; }
+  .resources-intro { max-width: 640px; margin-bottom: 1.5rem; color: var(--color-text-light); }
+  .tool-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; list-style: none; }
+  .tool-list li { padding: 1.25rem 1.5rem; border: 1px solid #c9d2dc; border-radius: var(--radius); }
+  .tool-list h3 { font-size: 1.2rem; margin-bottom: 0.35rem; }
+  .tool-list p { color: var(--color-text-light); }
+  .preview-tag {
+    display: inline-block; margin-top: 0.5rem; padding: 0.15rem 0.5rem; border: 1px dashed #8a6100; border-radius: 4px;
+    background: #fff8e1; color: #3d2b00; font-size: 0.75rem; font-weight: 600;
+  }
+  .guide-list { display: grid; gap: 0.75rem; margin-bottom: 1.5rem; list-style: none; }
+  .guide-list li { display: flex; flex-direction: column; padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-surface-alt); }
+  .guide-list a { font-weight: 700; font-size: 1.05rem; }
+  .guide-list span { font-size: 0.875rem; color: var(--color-text-light); }
+
+  @media (max-width: 760px) {
+    .tool-list { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

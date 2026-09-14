@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuidedTool from '../../components/tools/GuidedTool.astro';
+import ToolHeader from '../../components/tools/ToolHeader.astro';
+import { TOOLS, TOOLS_BY_ID, toolMode } from '../../lib/tools/registry.ts';
+import type { ToolId } from '../../lib/tools/types.ts';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return TOOLS.map((tool) => ({ params: { tool: tool.slug }, props: { toolId: tool.id } }));
+}
+
+interface Props {
+  toolId: ToolId;
+}
+
+const tool = TOOLS_BY_ID[Astro.props.toolId];
+const mode = toolMode(tool.rules.status, {
+  dev: import.meta.env.DEV,
+  previewFlag: import.meta.env.PUBLIC_GUIDED_TOOLS_PREVIEW,
+});
+---
+
+<BaseLayout title={`${tool.name} | Vigilon Cyber`} description={tool.summary} noindex={mode !== 'live'}>
+  <ToolHeader slot="header" toolName={tool.shortName} />
+  <GuidedTool tool={tool} mode={mode} />
+</BaseLayout>

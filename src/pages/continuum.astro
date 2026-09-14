@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import DevNote from '../components/DevNote.astro';
+import { toolLinkOr } from '../lib/tools/registry.ts';
+
+const title = 'Vigilon Continuum — SaaS Reporting Platform | Vigilon Cyber';
+const description = 'Vigilon Continuum is Vigilon Cyber’s SaaS reporting platform, the ongoing part of our product cybersecurity compliance offer.';
+
+const env = { dev: import.meta.env.DEV, previewFlag: import.meta.env.PUBLIC_GUIDED_TOOLS_PREVIEW };
+const reportingLink = toolLinkOr('reporting-readiness', '/services/cyber-resilience-act#vulnerability-handling', env);
+---
+
+<BaseLayout title={title} description={description}>
+  <Header slot="header" />
+
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Home</a><span>/</span><strong>Vigilon Continuum</strong>
+      </div>
+      <h1>Vigilon Continuum</h1>
+      <p>Vigilon’s SaaS reporting platform — the ongoing part of our testing, documentation and reporting offer.</p>
+      <div class="header-actions">
+        <a href="/request-quote?service=continuum" class="btn btn-primary">Ask about Continuum</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <DevNote inputs={['INPUT-03']}>
+        <p>Before launch, add an approved product screenshot or short demo near the top, and confirmed details: who uses Continuum, what information goes in and comes out, which tasks remain the customer’s, availability, onboarding, pricing approach, data handling, and any integrations. Describe prepare, coordinate, track, export or submit functions only once they are verified.</p>
+      </DevNote>
+
+      <h2>What Continuum is</h2>
+      <p>Vigilon Continuum is a software-as-a-service (SaaS) reporting platform from Vigilon Cyber. Our testing and documentation services produce evidence at a point in time; Continuum is our platform offer for the reporting work that continues after a product is on the market.</p>
+      <p>Capabilities and availability vary. <a href="/request-quote?service=continuum">Ask us</a> which parts of your process Continuum can support.</p>
+
+      <h2>How it relates to our services</h2>
+      <ul>
+        <li><a href="/services/red-cyber-compliance">RED cybersecurity testing</a> and <a href="/services/penetration-testing">penetration testing</a> produce test evidence.</li>
+        <li><a href="/services/cyber-resilience-act">CRA readiness &amp; technical documentation</a> turns that evidence and your processes into the documentation the CRA requires.</li>
+        <li>Continuum is the platform part of the offer, for ongoing reporting.</li>
+      </ul>
+
+      <h2>Continuum and the EU Single Reporting Platform</h2>
+      <p>Under the Cyber Resilience Act, manufacturers notify actively exploited vulnerabilities and severe incidents through the Single Reporting Platform established by ENISA, using the electronic notification endpoint of the relevant national CSIRT.</p>
+      <p>Vigilon Continuum is a Vigilon product. It is separate from the official Single Reporting Platform.</p>
+      <p class="sources">Source: Regulation (EU) 2024/2847, Articles 14 and 16. Checked 13&nbsp;September&nbsp;2026.</p>
+
+      <h2>Where to start</h2>
+      <p>If you’re not sure how ready your reporting process is, start with the <a href={reportingLink}>reporting readiness check</a>. It asks about your process — never about actual vulnerabilities or incidents.</p>
+
+      <div class="text-center mt-2">
+        <a href="/request-quote?service=continuum" class="btn btn-primary btn-lg">Ask about Continuum</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .header-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+  .sources { font-size: 0.9rem; color: var(--color-text-light); }
+</style>
