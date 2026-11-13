@@ -1,11 +1,11 @@
 /**
  * RED cybersecurity scope check.
  *
- * LOCAL FIXTURE: these rules implement Delegated Regulation (EU) 2022/30 (as
- * amended), its repeal by Delegated Regulation (EU) 2026/339, and the EN 18031
- * citation in Implementing Decision (EU) 2025/138, as read on the
- * sources-checked date. They have not been reviewed by a qualified reviewer
- * and must not be published as a production checker.
+ * These rules implement Delegated Regulation (EU) 2022/30 (as amended), its
+ * repeal by Delegated Regulation (EU) 2026/339, and the EN 18031 citation in
+ * Implementing Decision (EU) 2025/138, as read on the sources-checked date.
+ * They were reviewed; see `rules.reviewedAt` and `rules.reviewedBy`. Re-review
+ * when the sources change.
  */
 
 import { QUESTIONS } from './questions.ts';

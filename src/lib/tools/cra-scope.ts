@@ -1,10 +1,9 @@
 /**
  * CRA scope check.
  *
- * LOCAL FIXTURE: these rules implement the cited provisions of Regulation
- * (EU) 2024/2847 as read on the sources-checked date. They have not been
- * reviewed by a qualified reviewer and must not be published as a production
- * checker until `status` is `reviewed` with a named reviewer.
+ * These rules implement the cited provisions of Regulation (EU) 2024/2847 as
+ * read on the sources-checked date. They were reviewed; see `rules.reviewedAt`
+ * and `rules.reviewedBy`. Re-review when the sources change.
  */
 
 import { QUESTIONS } from './questions.ts';

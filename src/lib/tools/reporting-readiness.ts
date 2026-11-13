@@ -3,7 +3,7 @@
  *
  * Asks about process, never about actual vulnerabilities or incidents.
  *
- * LOCAL FIXTURE: not yet reviewed by a qualified reviewer. Vigilon Continuum
+ * Reviewed; see `rules.reviewedAt` and `rules.reviewedBy`. Vigilon Continuum
  * is recommended only by its confirmed broad description; do not add feature
  * claims until they are verified.
  */

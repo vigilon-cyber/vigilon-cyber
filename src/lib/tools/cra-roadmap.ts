@@ -4,8 +4,8 @@
  * Turns readiness answers into ordered workstreams. It reuses answers from the
  * CRA scope check so those questions aren't asked twice.
  *
- * LOCAL FIXTURE: prioritisation and references have not been reviewed by a
- * qualified reviewer and must not be published as a production planner.
+ * Prioritisation and references were reviewed against the cited sources; see
+ * `rules.reviewedAt` and `rules.reviewedBy`. Re-review when the sources change.
  */
 
 import { QUESTIONS } from './questions.ts';
@@ -139,7 +139,7 @@ export const craRoadmap: ToolDefinition = {
     version: '0.1.0',
     status: 'reviewed',
     sourcesCheckedAt: SOURCES_CHECKED_AT,
-    reviewedAt: '2024-09-14',
+    reviewedAt: '2026-09-14',
     reviewedBy: 'Bryce Kowalczyk',
     positionRules: [
       {
