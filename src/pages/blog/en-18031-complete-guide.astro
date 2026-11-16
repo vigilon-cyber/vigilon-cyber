@@ -15,7 +15,7 @@ const description = 'Everything manufacturers need to know about EN 18031-1 comp
       <div class="breadcrumb">
         <a href="/">Home</a><span>/</span><a href="/blog">Blog</a><span>/</span><strong>EN 18031-1 Complete Guide</strong>
       </div>
-      <div class="blog-meta" style="color:var(--color-accent-light);">April 2026 · 12 min read</div>
+      <div class="blog-meta" style="color:var(--color-accent-light);">April 2026 · 18 min read</div>
       <h1>The Complete Guide to EN 18031-1 Compliance</h1>
       <p>Everything manufacturers need to know about meeting the harmonised cybersecurity standard for CE marking under the Radio Equipment Directive.</p>
     </div>
@@ -24,61 +24,136 @@ const description = 'Everything manufacturers need to know about EN 18031-1 comp
   <article class="section">
     <div class="container prose">
       <h2>Introduction</h2>
-      <p>EN 18031-1 has rapidly become the most important cybersecurity standard for manufacturers of connected radio equipment seeking access to the European market. As the harmonised standard under the Radio Equipment Directive (RED) 2014/53/EU, it provides a presumption of conformity for the cybersecurity essential requirements — making it the most efficient path to CE marking.</p>
-      <p>This guide covers everything you need to know: the scope of the standard, its structure, the evaluation methodology, documentation requirements, and practical guidance on achieving compliance.</p>
+      <p>EN 18031 has rapidly become the most important cybersecurity standard for manufacturers of connected radio equipment seeking access to the European market. As the harmonised standard under the Radio Equipment Directive (RED) 2014/53/EU, it provides a presumption of conformity for the legislature's essential cybersecurity requirements, making it the most efficient path to CE marking.</p>
+      <p>This guide covers everything you need to know for the first standard of the family of three: EN 18031-1. We will explore the scope of the standard, its structure, the evaluation methodology, documentation requirements, and practical guidance on achieving compliance.</p>
 
       <h2>Background: The Radio Equipment Directive and Cybersecurity</h2>
-      <p>The RED established essential requirements for radio equipment placed on the EU market. In 2022, the European Commission activated the cybersecurity provisions under Article 3.3:</p>
+      <p>The Radio Equipment Directive (RED 2014/53/EU) established essential regulatory requirements for radio equipment placed on the EU market. 
+        Published in 2014, it replaced the previous R&TTE 19995/5/EC framework as of June 2017 onward. 
+      </p>
+      <p>The RED included provisions for cybersecurity in Articles 3.3(d), 3.3(e), and 3.3(f), but these stayed dormant until 2022 when they were activated by the RED Delegated Act (DA) (Commission Delegated Regulation 20222/30), aiming to extend explicit cybersecurity obligations for internet connected radio devices. 
+        With Articles 3.3(d,e,f) effective August 2024, EN 18031 was published January 30th, 2025 in the Official Journal of the European Union (OJEU), and set into full force as of August 1st, 2025.
+        The standard is a family of three: EN 18031-1, -2, and -3 with each mapping directly to the three cybersecurity specific requirements paragraphs under the RED Article 3.3:
+      </p>
       <ul>
         <li><strong>Article 3.3(d):</strong> Network protection — radio equipment must not harm the network or its functioning, nor misuse network resources</li>
         <li><strong>Article 3.3(e):</strong> Privacy safeguards — protection of personal data and privacy of users</li>
         <li><strong>Article 3.3(f):</strong> Fraud protection — radio equipment must support features to protect against fraud</li>
       </ul>
-      <p>EN 18031-1 provides the harmonised cybersecurity requirements and evaluation methodology that, when applied, give a presumption of conformity with these essential requirements.</p>
+      <p>EN 18031 provides the harmonized cybersecurity requirements and evaluation methodology that, when applied, give a presumption of conformity with these essential requirements.</p>
 
       <h2>Scope of EN 18031-1</h2>
-      <p>EN 18031-1 applies to internet-connected radio equipment placed on the EU market. This includes a vast range of products:</p>
+      <p>EN 18031-1 maps to Article 3.3(d) and applies to any electronic device or equipment with a wireless interface and is also capable of transmitting data to the internet (directly or indirectly) placed on the EU market. 
+        That means that even a sensor which only uploads UV and humidity via BLE or LoRaWAN to a mobile device or router which then relays the data to the internet falls under the scope. This includes a vast range of products:</p>
       <ul>
         <li>Wi-Fi routers and access points</li>
         <li>Smart home devices and IoT equipment</li>
         <li>Wearable technology</li>
         <li>Connected industrial equipment</li>
+        <li>Smart sensors and environmental monitoring devices</li>
         <li>Mobile phones and tablets</li>
+        <li>Industrial and edge computing devices</li>
+        <li>Connected automotive systems</li>
         <li>Any radio equipment with IP connectivity</li>
+        <li>Wireless banking and payment terminals</li>
       </ul>
-      <p>The standard is divided into three parts, corresponding to the three essential requirements: EN 18031-1 (network protection), EN 18031-2 (privacy), and EN 18031-3 (fraud protection). Most manufacturers will need to address all three parts.</p>
-
+      <p>The standard is divided into three parts, corresponding to the three essential requirements: EN 18031-1 (network protection), EN 18031-2 (privacy), and EN 18031-3 (fraud protection). Most manufacturers will likely only need to address network protection and perhaps privacy, while EN 18031-3 has a very narrow scope. Nevertheless, some products may still need to address all three parts.</p>
+      <p>In our list all fit under the scope of -1, about half may also need to consider privacy under -2, and only the banking terminals and perhaps mobile phones would need to address fraud protection under -3.</p>
+      
       <h2>Structure and Key Requirements</h2>
-      <p>EN 18031-1 is structured around security objectives and associated requirements. Key areas include:</p>
+      <p>EN 18031-1 is structured around the protection of a device's network and security assets, and the requirements associated with ensuring the device cannot compromise network security. The requirements are grouped into eleven areas (known as Mechanisms in the standard). Most requirements come with a decision tree that determines whether the requirement applies to a given asset or interface, so each item below notes the main conditions under which it does not apply.</p>
 
-      <h3>Access Control</h3>
-      <p>Products must implement appropriate access control mechanisms, including authentication, authorisation, and session management. Default credentials are prohibited; devices must use unique-per-device credentials or require user setup.</p>
+      <h3>Access Control Mechanism (ACM)</h3>
+      <ul>
+        <li><strong>ACM-1 — Applicability of access control mechanisms:</strong> Every security asset and network asset that entities can access must be protected by an access control mechanism, so that only authorized users and processes reach it. The exceptions are assets that are intentionally public as part of the equipment's functionality, assets already protected by physical or logical measures in the target environment, and assets that a law or regulation requires to be left uncontrolled.</li>
+        <li><strong>ACM-2 — Appropriate access control mechanisms:</strong> Each access control mechanism required by ACM-1 must actually ensure that only entities with appropriate permissions can access the protected assets. It may be based on Role-Based Access Control (RBAC), Discretionary Access Control (DAC), Mandatory Access Control (MAC), or another suitable model, and in every case least privilege must be enforced and only authorized personnel may change roles, identities or clearances.</li>
+      </ul>
 
-      <h3>Secure Communication</h3>
-      <p>All network communications must be appropriately encrypted and authenticated. The standard specifies requirements for cryptographic algorithms, key management, and certificate handling.</p>
+      <h3>Authentication Mechanism (AUM)</h3>
+      <ul>
+        <li><strong>AUM-1-1 — Applicability, network interfaces:</strong> Access control mechanisms that manage access over network interfaces must use authentication wherever that access allows reading confidential network configurations or security parameters, modifying sensitive ones, or using network or security functions. Authentication may be absent only where the equipment's intended functionality requires it, or where the network the equipment is deployed in limits access to authorized entities.</li>
+        <li><strong>AUM-1-2 — Applicability, user interfaces:</strong> The same requirement applies to access through user interfaces, with the same exceptions, including read-only access that the intended functionality needs to offer without authentication.</li>
+        <li><strong>AUM-2 — Appropriate authentication mechanisms:</strong> Each required authentication mechanism must verify an entity's claim using at least one knowledge, possession, or inherence factor.</li>
+        <li><strong>AUM-3 — Authenticator validation:</strong> Each authentication mechanism must validate all relevant properties of the authenticator using the information available in its operational environment (for example, every character of a password, or all fields of a certificate including expiration and revocation status, as applicable).</li>
+        <li><strong>AUM-4 — Changing authenticators:</strong> Authentication mechanisms must allow authenticators to be changed, unless a conflicting security goal makes a change impermissible.</li>
+        <li><strong>AUM-5-1 — Factory default passwords:</strong> Factory default passwords must either be unique per device and follow current best practice for strength, or the user must be forced to change them on or before first use.</li>
+        <li><strong>AUM-5-2 — Non-factory default passwords:</strong> Where there is no factory default password, the password must be set by the user on or before first use and before the device logically connects to a network, defined by an authorized entity within an access-limited network, or generated by the equipment as a strong password and communicated only to an authorized entity within an access-limited network.</li>
+        <li><strong>AUM-6 — Brute force protection:</strong> Authentication mechanisms must withstand brute-force attacks, for example through delays between attempts, a limit on the number of attempts, authenticator complexity, or another effective method.</li>
+      </ul>
 
-      <h3>Software Update Mechanism</h3>
-      <p>Products must support secure software updates with integrity verification. The update mechanism must be protected against rollback attacks and unauthorised modifications.</p>
+      <h3>Secure Update Mechanism (SUM)</h3>
+      <ul>
+        <li><strong>SUM-1 — Applicability of update mechanisms:</strong> All software, including firmware, that affects security or network assets must be updatable. The exceptions are software that safety constraints prohibit from being updated, software that is immutable, and software protected by alternative measures for the whole lifecycle of the equipment.</li>
+        <li><strong>SUM-2 — Secure updates:</strong> Each update mechanism must install software only when its integrity and authenticity are valid at the time of installation. This can rely on digital signatures from authorized entities, a secure channel to the authorized update source, access control for authorized updaters combined with hash-protected software, or another method.</li>
+        <li><strong>SUM-3 — Automated updates:</strong> Each update mechanism must support unattended updating, updating on an approved schedule, or approved or supervised triggering where human intervention is needed to avoid operational harm or disruption.</li>
+      </ul>
 
-      <h3>Secure Storage</h3>
-      <p>Security-sensitive data — including credentials, cryptographic keys, and personal data — must be stored securely with appropriate protection against extraction and tampering.</p>
+      <h3>Secure Storage Mechanism (SSM)</h3>
+      <ul>
+        <li><strong>SSM-1 — Applicability of secure storage mechanisms:</strong> Security assets and network assets that are stored persistently must be held in secure storage, unless physical or logical controls in the target environment already restrict access to authorized entities.</li>
+        <li><strong>SSM-2 — Integrity protection:</strong> Each secure storage mechanism must protect the integrity of the assets it stores, using digital signatures, access controls that deny unauthorized modification, one-time-programmable memory, hardware memory protection, or another method.</li>
+        <li><strong>SSM-3 — Confidentiality protection:</strong> Each secure storage mechanism must keep confidential security parameters and confidential network-function configurations secret, using encryption, access controls that deny unauthorized reading, hardware protection, or another method.</li>
+      </ul>
 
-      <h3>Resilience</h3>
-      <p>Products must be designed to maintain essential functionality during and after security incidents, including resistance to denial-of-service conditions.</p>
+      <h3>Secure Communication Mechanism (SCM)</h3>
+      <ul>
+        <li><strong>SCM-1 — Applicability of secure communication mechanisms:</strong> Security assets and network assets communicated over network interfaces must use a secure communication mechanism. The exceptions are where controls in the target environment prevent exposure, or where temporary exposure is needed to establish or manage an authenticated connection or trust relation.</li>
+        <li><strong>SCM-2 — Integrity and authenticity protection:</strong> Secure communication mechanisms must follow best practice to protect the integrity and authenticity of communicated assets, unless an interoperability requirement justifies a deviation. Trust can be anchored in a device-unique secret introduced during production, a secret exchanged over an independent channel, a certificate from a trusted PKI, an existing trust relationship with a third party, or another method.</li>
+        <li><strong>SCM-3 — Confidentiality protection:</strong> Wherever communicated assets need confidentiality, secure communication mechanisms must follow best practice to protect it (message-level or channel-level encryption, or another method), unless an interoperability requirement justifies a deviation.</li>
+        <li><strong>SCM-4 — Replay protection:</strong> Secure communication mechanisms must follow best practice for replay protection, such as authenticated sequence numbers, authenticated timestamps, or single-transaction encryption keys. This does not apply where a duplicated transfer poses no replay threat, or where an interoperability requirement justifies a deviation.</li>
+      </ul>
+
+      <h3>Resilience Mechanism (RLM)</h3>
+      <ul>
+        <li><strong>RLM-1 — Applicability and appropriateness of resilience mechanisms:</strong> Network interfaces must have resilience mechanisms that mitigate the effects of denial-of-service attacks and return the equipment to a defined state. The exceptions are isolated local interfaces and interfaces that other network devices already protect sufficiently.</li>
+      </ul>
+
+      <h3>Network Monitoring Mechanism (NMM)</h3>
+      <ul>
+        <li><strong>NMM-1 — Applicability and appropriateness of network monitoring mechanisms:</strong> Network equipment must monitor the traffic it processes between networks to detect indicators of denial-of-service attacks, for example by monitoring and filtering GTP messages or relevant IP packets such as ICMP and ARP.</li>
+      </ul>
+
+      <h3>Traffic Control Mechanism (TCM)</h3>
+      <ul>
+        <li><strong>TCM-1 — Applicability and appropriateness of traffic control mechanisms:</strong> Network equipment must provide at least one traffic control mechanism, such as rules applied to anomalous, malicious or unauthorized IP datagrams, or full physical or logical separation of traffic domains.</li>
+      </ul>
+
+      <h3>Confidential Cryptographic Keys (CCK)</h3>
+      <ul>
+        <li><strong>CCK-1 — Appropriate CCKs:</strong> Preinstalled or device-generated confidential cryptographic keys must provide at least 112 bits of security strength, unless a justified deviation applies to the specific security mechanism using the key.</li>
+        <li><strong>CCK-2 — CCK generation mechanisms:</strong> Confidential cryptographic keys must be generated following cryptographic best practice, unless a justified deviation applies to the specific mechanism.</li>
+        <li><strong>CCK-3 — Preventing static values for preinstalled CCKs:</strong> Preinstalled confidential cryptographic keys must be practically unique per device, unless they are used only to establish controlled initial trust or the intended functionality requires them as shared parameters.</li>
+      </ul>
+
+      <h3>General Equipment Capabilities (GEC)</h3>
+      <ul>
+        <li><strong>GEC-1 — No known exploitable vulnerabilities:</strong> The equipment's software and hardware must not contain publicly known exploitable vulnerabilities that affect security or network assets, unless they are not applicable to the equipment, mitigated to an acceptable residual risk, or formally risk-accepted.</li>
+        <li><strong>GEC-2 — Limit exposure of services:</strong> In the factory-default state, only the network interfaces and network-exposed services needed for setup or basic operation may be exposed where they affect security or network assets.</li>
+        <li><strong>GEC-3 — Configuration of optional interfaces and services:</strong> Optional network interfaces and optional network-exposed services that are part of the factory default and affect security or network assets must be possible for an authorized user to enable and disable.</li>
+        <li><strong>GEC-4 — Documentation of exposed interfaces and services:</strong> The user documentation must describe every network interface and network-exposed service delivered in the factory-default state.</li>
+        <li><strong>GEC-5 — No unnecessary external interfaces:</strong> The equipment may expose only the physical external interfaces that its intended functionality needs.</li>
+        <li><strong>GEC-6 — Input validation:</strong> Input received through external interfaces must be validated whenever it can affect security assets or network assets.</li>
+      </ul>
+
+      <h3>Cryptography (CRY)</h3>
+      <ul>
+        <li><strong>CRY-1 — Best practice cryptography:</strong> Cryptography that protects security or network assets must follow best practice, unless a justified deviation applies to the specific access control, authentication, secure communication, secure update, or secure storage mechanism that uses it.</li>
+      </ul>
 
       <h2>The Evaluation Methodology</h2>
-      <p>EN 18031-1 includes a detailed evaluation methodology that defines how conformity is assessed. The evaluation includes:</p>
+      <p>EN 18031 includes a detailed evaluation methodology that defines how conformity is assessed. The evaluation includes applying the following steps to every mechanism's requirements:</p>
       <ol>
-        <li><strong>Documentation review:</strong> Assessment of design documentation, security architecture, and risk assessment</li>
-        <li><strong>Functional testing:</strong> Verification that security mechanisms operate as specified</li>
-        <li><strong>Vulnerability analysis:</strong> Assessment of resistance to known attack vectors</li>
-        <li><strong>Configuration review:</strong> Verification of default and configurable security settings</li>
+        <li><strong>Conceptual Assessment:</strong> Assessment of design documentation, security architecture, and ICS & IXIT specifications, to determine if the requirement is theoretically addressed</li>
+        <li><strong>Functional Completeness:</strong> Verification that security mechanisms outlined in the documentation or design are implemented as specified</li>
+        <li><strong>Functional Sufficiency:</strong> Live technical assessment to ensure the security mechanism implemented in the product design meets the requirement.</li>
       </ol>
+      <p> For each assessment unit, based on the evidence supplied, collected, and observations made during the assessment, a decision tree is followed to determine whether the requirement is met, not applicable, or not met.</p>
 
       <h2>Self-Declaration vs. Notified Body</h2>
       <p>Manufacturers have two options for demonstrating conformity:</p>
-      <p><strong>Self-declaration (Module A)</strong> is appropriate when the harmonised standard fully covers the applicable essential requirements. The manufacturer (or a commissioned test laboratory) performs the assessment and issues an EU Declaration of Conformity.</p>
+      <p><strong>Self-declaration (Module A)</strong> As long as a the product does not trigger any of the Restrictions published in the OJEU since the last update, manufacturers may opt to use EN 18031 to for presumption of conformity. The manufacturer (or a commissioned ISO/IEC 17025 test laboratory) performs the assessment and issues an EU Declaration of Conformity.</p>
       <p><strong>Notified Body assessment (Module B+C)</strong> is required for certain product categories or when harmonised standards do not fully cover the essential requirements. A designated Notified Body conducts the EU-type examination. Read our detailed comparison in <a href="/blog/self-declaration-vs-notified-body">Self-Declaration vs. Notified Body</a>.</p>
+      <p> Currently, the only restriction set in place for EN 18031-1 is if the product maybe be used without a password at all.</p>
 
       <h2>Documentation Requirements</h2>
       <p>The technical file must include:</p>
@@ -95,14 +170,16 @@ const description = 'Everything manufacturers need to know about EN 18031-1 comp
       <h2>Practical Tips for Manufacturers</h2>
       <ol>
         <li><strong>Start early.</strong> EN 18031-1 compliance is much easier to achieve when security is considered from the design phase.</li>
-        <li><strong>Conduct a gap analysis first.</strong> Before committing to full testing, understand where your product stands. A <a href="/services/en-18031-compliance">targeted gap analysis</a> saves time and money.</li>
+        <li><strong>Consider a gap analysis first.</strong> If your product was built without cybersecurity requirements in mind, a gap analysis helps identify weaknesses early. Before committing to full testing, understand where your product stands. A <a href="/services/en-18031-compliance">targeted gap analysis</a> saves time and money.</li>
         <li><strong>Don't overlook documentation.</strong> Many non-conformities arise from documentation gaps, not technical failures.</li>
-        <li><strong>Plan for updates.</strong> Your product's security doesn't end at CE marking — plan for vulnerability handling and software updates throughout its lifecycle.</li>
-        <li><strong>Consider the CRA overlap.</strong> Products subject to EN 18031-1 may also fall under the <a href="/services/cyber-resilience-act">Cyber Resilience Act</a>. Plan your compliance strategy holistically.</li>
+        <li><strong>Plan for updates.</strong> Your product's security doesn't end at CE marking. Plan for vulnerability handling and software updates throughout its lifecycle.</li>
+        <li><strong>Consider the CRA.</strong> Products subject to EN 18031-1 are almost certain to also fall under the <a href="/services/cyber-resilience-act">Cyber Resilience Act</a>. When the CRA comes into effect, EN 18031 will be repealed. However, all evidence collected for EN 18031 compliance maps directly toward meet the essential cybersecurity requirements of the CRA and will continue to be valuable for CRA compliance. Plan your compliance strategy holistically.</li>
       </ol>
 
       <h2>How Vigilon Cyber Can Help</h2>
-      <p>We provide end-to-end <a href="/services/en-18031-compliance">EN 18031-1 compliance services</a> — from initial gap analysis through to full compliance testing, technical file preparation, and Notified Body assessment support. Our team has deep expertise in the standard and the regulatory landscape.</p>
+      <p>We provide end-to-end <a href="/services/en-18031-compliance">EN 18031-1 compliance services</a>. From initial gap analysis through to full compliance testing, technical file preparation, and Notified Body assessment support, our team has deep expertise in the standard and the regulatory landscape.</p>
+
+      <p class="blog-author">Written by Bryce Kowalczyk, Principal Engineer & Technical Manager</p>
 
       <div class="text-center mt-2">
         <a href="/request-quote" class="btn btn-primary btn-lg">Discuss Your EN 18031 Project</a>
