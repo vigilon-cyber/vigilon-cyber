@@ -23,3 +23,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# EN 18031 YAML Reference files
+en-18031*.yaml
